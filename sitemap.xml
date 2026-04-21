@@ -2,6 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://wickenburghorseproperty.com/</loc><priority>1.0</priority></url>
   <url><loc>https://wickenburghorseproperty.com/agents.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/market/</loc><priority>0.9</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/market/price-guide.html</loc><priority>0.9</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/market/financing.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/property-types/</loc><priority>0.9</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/property-types/roping-arena-properties.html</loc><priority>0.9</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/property-types/working-ranch-properties.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/property-types/luxury-equestrian-estates.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/property-types/starter-horse-properties.html</loc><priority>0.8</priority></url>
   <url><loc>https://wickenburghorseproperty.com/neighborhoods/</loc><priority>0.9</priority></url>
   <url><loc>https://wickenburghorseproperty.com/neighborhoods/constellation-road.html</loc><priority>0.9</priority></url>
   <url><loc>https://wickenburghorseproperty.com/neighborhoods/hassayampa-valley.html</loc><priority>0.8</priority></url>
@@ -9,11 +17,18 @@
   <url><loc>https://wickenburghorseproperty.com/neighborhoods/vulture-mine-road.html</loc><priority>0.8</priority></url>
   <url><loc>https://wickenburghorseproperty.com/neighborhoods/morristown.html</loc><priority>0.8</priority></url>
   <url><loc>https://wickenburghorseproperty.com/neighborhoods/congress.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/lifestyle/</loc><priority>0.9</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/lifestyle/trails-riding.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/lifestyle/events-arenas.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/lifestyle/snowbird-seasonal.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/guides/</loc><priority>0.9</priority></url>
   <url><loc>https://wickenburghorseproperty.com/guides/buying-guide.html</loc><priority>0.9</priority></url>
   <url><loc>https://wickenburghorseproperty.com/guides/water-wells.html</loc><priority>0.8</priority></url>
   <url><loc>https://wickenburghorseproperty.com/guides/zoning.html</loc><priority>0.8</priority></url>
   <url><loc>https://wickenburghorseproperty.com/guides/arena-footing.html</loc><priority>0.8</priority></url>
   <url><loc>https://wickenburghorseproperty.com/guides/barn-inspection.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/services/contact.html</loc><priority>0.8</priority></url>
+  <url><loc>https://wickenburghorseproperty.com/services/sell-your-property.html</loc><priority>0.7</priority></url>
   <url><loc>https://wickenburghorseproperty.com/articles/</loc><priority>0.8</priority></url>
   <url><loc>https://wickenburghorseproperty.com/articles/why-wickenburg.html</loc><priority>0.8</priority></url>
   <url><loc>https://wickenburghorseproperty.com/articles/constellation-road.html</loc><priority>0.7</priority></url>
@@ -22,5 +37,4 @@
   <url><loc>https://wickenburghorseproperty.com/articles/ag-exemption.html</loc><priority>0.7</priority></url>
   <url><loc>https://wickenburghorseproperty.com/articles/morristown.html</loc><priority>0.7</priority></url>
   <url><loc>https://wickenburghorseproperty.com/articles/california-to-arizona.html</loc><priority>0.7</priority></url>
-<!-- built 2026-04-21T17:37:11Z -->
 </urlset>
