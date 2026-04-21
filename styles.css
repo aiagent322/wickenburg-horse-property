@@ -81,3 +81,72 @@ h2.related-heading + ul { margin-top: 10px; }
   .page-main h2 { font-size: 1.2em; }
   .hp-main { padding: 0 20px; }
 }
+
+/* ── Mobile improvements ── */
+
+/* Remove 300ms tap delay on all touch devices */
+a, button { touch-action: manipulation; }
+
+/* Focus styles for keyboard / accessibility */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid #C8A96E;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Fix hp-section list alignment for multi-line items */
+.hp-section ul li { align-items: flex-start; }
+.hp-section ul li a { padding-top: 2px; line-height: 1.45; }
+
+/* Better link underline legibility */
+.page-main a, .hp-section ul li a { text-underline-offset: 3px; }
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Improve long description list items on mobile */
+@media (max-width: 640px) {
+  /* Descriptions embedded in links — constrain to 4 lines max */
+  .page-main ul li a, .hp-section ul li a {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* Key takeaway bullets — no clamp needed, they're shorter */
+  .page-main ul.kp li { overflow: visible; display: list-item; }
+  /* Related links — 3 lines max */
+  h2.related-heading + ul li a {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* CTA button — full width on narrow screens, not capped */
+  .hp-cta { max-width: 100%; }
+  /* Nav logo shorter text on mobile */
+  .nav-inner { padding: 0 12px; }
+  /* Increase tap area on mobile menu links slightly */
+  .nav-mobile-menu a { padding: 14px 20px; }
+}
+
+/* Wider phones — allow slightly more description text */
+@media (min-width: 390px) and (max-width: 640px) {
+  .page-main ul li a, .hp-section ul li a { -webkit-line-clamp: 5; }
+}
+
+/* Description text after link title in list items */
+.li-desc {
+  color: #555;
+  font-size: .92em;
+  line-height: 1.5;
+  display: inline;
+}
+@media (max-width: 640px) {
+  /* On mobile, break description onto its own line */
+  .li-desc { display: block; margin-top: 2px; }
+  /* Undo line-clamp for items that use .li-desc structure */
+  .page-main ul li a, .hp-section ul li a { -webkit-line-clamp: 2; }
+}
