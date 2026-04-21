@@ -1,14 +1,11 @@
 /*
   Cache-Control: public, max-age=0, must-revalidate
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
 
 /*.html
   Cache-Control: public, max-age=3600
 
 /styles.css
   Cache-Control: public, max-age=604800
-  Content-Type: text/css; charset=utf-8
 
 /og-image.png
   Cache-Control: public, max-age=604800
