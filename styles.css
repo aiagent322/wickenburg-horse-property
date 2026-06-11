@@ -150,3 +150,4 @@ a:focus-visible, button:focus-visible {
   /* Undo line-clamp for items that use .li-desc structure */
   .page-main ul li a, .hp-section ul li a { -webkit-line-clamp: 2; }
 }
+.header-bb { display:flex; align-items:center; margin-left:auto; flex-shrink:0; }
