@@ -34,10 +34,23 @@
       <li><a href="https://www.horsepropertyagents.com/agents/?q=wickenburg" target="_blank" rel="noopener noreferrer">Find an Agent</a></li>
     </ul>
   </div>
+  <ul class="nav-mobile-menu" id="mobile-menu">
+    <li><a href="/services/contact">📬 Contact Us</a></li>
+    <li><a href="/neighborhoods/">Neighborhoods</a></li>
+    <li><a href="/guides/">Buyer's Guides</a></li>
+    <li><a href="/agents.html">Agents</a></li>
+    <li><a href="/articles/">Articles</a></li>
+    <li><a href="/services/sell-your-property.html">🏡 Sell Your Property</a></li>
+    <li><a href="https://www.horsepropertyagents.com/agents/?q=wickenburg" target="_blank" rel="noopener noreferrer">Find an Agent &#8594;</a></li>
+  </ul>
 </nav>
 <script>
   document.getElementById('nav-btn').addEventListener('click',function(){
     document.getElementById('site-nav').classList.toggle('open');
+  });
+  document.addEventListener('click',function(e){
+    var n=document.getElementById('site-nav');
+    if(n&&!n.contains(e.target)) n.classList.remove('open');
   });
 </script>
 <main id="main-content" class="error-wrap">
