@@ -12,8 +12,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Horse Properties For Sale — Wickenburg, AZ">
 <meta name="twitter:description" content="Wickenburg horse properties — roping arenas, working ranches, luxury estates. Local specialist agents, updated daily.">
+<meta property="og:image" content="https://wickenburghorseproperty.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://wickenburghorseproperty.com/og-image.png">
 <meta name="robots" content="index, follow">
-<link rel="stylesheet" href="/styles.css">
+<link rel="preload" href="/styles.css" as="style">
+  <link rel="stylesheet" href="/styles.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -315,6 +320,7 @@
 </div>
 
 <!-- ── Listings ── -->
+<main id="main-content" aria-label="Property listings">
 <div class="listings-wrap">
   <div id="listings-output">
     <!-- Skeleton loading state -->
@@ -604,6 +610,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+
+</main>
 
 <!-- Network Footer -->
 <footer class="network-footer">
