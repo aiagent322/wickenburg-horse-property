@@ -440,7 +440,7 @@ h2.related-heading + ul { margin-top: 10px; }
   .page-main ul li a { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
   .page-main ul.kp li { overflow: visible; display: list-item; }
   h2.related-heading + ul li a { -webkit-line-clamp: 3; }
-  .hp-cta { max-width: 100%; }
+  .hp-cta { max-width: 100%; width: 100%; }
   .hp-main { padding: 0 16px; }
   .hp-hero { padding: 24px 0 20px; }
   .hp-hero h1 { font-size: 1.4em; line-height: 1.25; }
@@ -539,10 +539,11 @@ h2.related-heading + ul { margin-top: 10px; }
 }
 
 /* When a real image IS set, it sits above the gradient placeholder */
-.page-hero[style*="background-image: url"] {
+/* When a photo URL is set inline, the gradient overlay sits on top of it */
+.page-hero[style*="background-image: url("] {
   background-image:
     linear-gradient(to bottom, rgba(26,18,8,0) 40%, rgba(26,18,8,.28) 100%),
-    var(--hero-img, none);
+    none; /* actual image comes from inline style attribute */
 }
 
 /* Placeholder label — visible only when no image loaded */
@@ -766,3 +767,97 @@ h2.related-heading + ul { margin-top: 10px; }
 .buy-sell-selling .buy-sell-cta:hover { background: #a06b44; }
 
 /* buy-sell mobile base stays 1-col; expands at 641px tablet block above */
+
+/* ════════════════════════════════════════
+   PRINT STYLESHEET
+   Strips nav, hero, sticky bars, footer.
+   Formats editorial content for paper.
+   Shows page URL after links.
+════════════════════════════════════════ */
+@media print {
+  /* Hide non-content elements */
+  #site-nav,
+  .skip-nav,
+  .publisher-strip,
+  .stats-bar,
+  .hp-hero-wrap,
+  .page-hero,
+  .page-hero-img,
+  .sticky-cta,
+  .network-footer,
+  .agent-cta-section,
+  .buy-sell-module,
+  .local-services,
+  #next-page-link,
+  .breadcrumb,
+  .hp-btn-center,
+  .hp-hero-ctas,
+  .seasonal-callout { display: none !important; }
+
+  /* Page setup */
+  body {
+    font-family: Georgia, serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #000;
+    background: #fff;
+    padding-bottom: 0 !important;
+    margin: 0;
+  }
+
+  /* Content layout */
+  .hp-wrap,
+  .page-main,
+  .hp-main { max-width: 100%; padding: 0; margin: 0; }
+
+  /* Headings */
+  h1 { font-size: 20pt; margin-bottom: 10pt; }
+  h2 { font-size: 14pt; margin-top: 18pt; page-break-after: avoid; }
+  h3 { font-size: 12pt; margin-top: 14pt; page-break-after: avoid; }
+
+  /* Links — show URL after text */
+  .page-main a[href]::after,
+  .hp-wrap a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #555;
+    font-style: italic;
+  }
+  /* But not for nav links or buttons */
+  .hp-cta::after,
+  .hp-btn::after { content: none; }
+
+  /* Keep content together */
+  p, li { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+
+  /* Guide/article sections */
+  .hp-section { padding: 8pt 0; }
+  .hp-section h3 {
+    background: none;
+    border-left: 2pt solid #000;
+    padding: 4pt 8pt;
+  }
+
+  /* Corridor cards — stack vertically for print */
+  .corridor-grid,
+  .guide-cards,
+  .editorial-grid { display: block; }
+  .corridor-card,
+  .guide-card,
+  .editorial-card { border: 1pt solid #ccc; padding: 8pt; margin-bottom: 8pt; }
+
+  /* Publisher attribution at top */
+  .page-main::before {
+    content: "WickenburgHorseProperty.com — Published by Bridle & Bit Magazine";
+    display: block;
+    font-size: 8pt;
+    color: #666;
+    border-bottom: 1pt solid #ccc;
+    padding-bottom: 6pt;
+    margin-bottom: 12pt;
+  }
+
+  /* Page breaks */
+  .page-main h2:first-of-type { page-break-before: avoid; }
+}
