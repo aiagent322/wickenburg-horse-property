@@ -431,26 +431,102 @@ h2.related-heading + ul { margin-top: 10px; }
 
 /* ════════════════════════════════════════
    PAGE HERO IMAGE — inner pages
+   .page-hero = the wrapper (handles bleed + overflow)
+   Set background-image inline on the element.
+   No image set? Placeholder gradient shows automatically.
 ════════════════════════════════════════ */
+
+/* Make .page-main the overflow context so bleed works cleanly */
+.page-main { overflow: visible; }
+
+.page-hero {
+  /* Bleed edge-to-edge past .page-main padding */
+  width: calc(100% + 48px);
+  margin-left: -24px;
+  height: 240px;
+  /* Image layer */
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+  /* Placeholder: warm desert gradient shown when no image is set */
+  background-color: #c9973a;
+  background-image:
+    linear-gradient(160deg, rgba(139,94,60,.85) 0%, rgba(44,31,16,.7) 100%);
+  /* Spacing */
+  margin-bottom: 22px;
+  display: block;
+  position: relative;
+}
+
+/* When a real image IS set, it sits above the gradient placeholder */
+.page-hero[style*="background-image: url"] {
+  background-image:
+    linear-gradient(to bottom, rgba(26,18,8,0) 40%, rgba(26,18,8,.28) 100%),
+    var(--hero-img, none);
+}
+
+/* Placeholder label — visible only when no image loaded */
+.page-hero::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 14px;
+  left: 24px;
+  right: 24px;
+  font-family: Georgia, serif;
+  font-size: .78rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.75);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  /* Only show when data-label is set and image failed/absent */
+  pointer-events: none;
+}
+
+@media (min-width: 641px) {
+  .page-hero { height: 300px; }
+}
+@media (max-width: 640px) {
+  .page-hero {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    height: 190px;
+  }
+}
+@media (max-width: 360px) {
+  .page-hero {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    height: 160px;
+  }
+}
+
+/* Legacy alias — keeps existing .page-hero-img elements working */
 .page-hero-img {
   width: calc(100% + 48px);
   margin-left: -24px;
-  height: 220px;
+  height: 240px;
   background-size: cover;
   background-position: center 40%;
-  margin-bottom: 20px;
+  background-repeat: no-repeat;
+  background-color: #c9973a;
+  background-image: linear-gradient(160deg, rgba(139,94,60,.85) 0%, rgba(44,31,16,.7) 100%);
+  margin-bottom: 22px;
   display: block;
 }
 @media (min-width: 641px) {
-  .page-hero-img { height: 280px; }
+  .page-hero-img { height: 300px; }
 }
 @media (max-width: 640px) {
   .page-hero-img {
     width: calc(100% + 32px);
     margin-left: -16px;
-    height: 180px;
+    height: 190px;
   }
 }
 @media (max-width: 360px) {
-  .page-hero-img { height: 150px; }
+  .page-hero-img {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    height: 160px;
+  }
 }
