@@ -111,7 +111,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #C8A96E; outline-offs
    PUBLISHER STRIP
 ════════════════════════════════════════ */
 .publisher-strip { background: #1a1208; border-bottom: 1px solid rgba(201,151,58,.25); padding: 10px 24px; }
-.publisher-strip-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; }
+.publisher-strip-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; }
 .publisher-logo-link { flex-shrink: 0; display: flex; align-items: center; }
 .publisher-text { font-size: .77rem; color: rgba(255,255,255,.7); font-family: Georgia,serif; }
 .publisher-text a { color: #c9973a; text-decoration: none; }
@@ -123,7 +123,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #C8A96E; outline-offs
    STATS BAR
 ════════════════════════════════════════ */
 .stats-bar { background: #2c1f10; padding: 0 24px; border-bottom: 2px solid #c9973a; }
-.stats-bar-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: stretch; justify-content: space-around; flex-wrap: wrap; }
+.stats-bar-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: stretch; justify-content: space-around; flex-wrap: wrap; }
 .stat-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 10px; text-align: center; }
 .stat-number { font-size: 1.15rem; font-weight: 700; color: #c9973a; font-family: Georgia,serif; line-height: 1.1; }
 .stat-label { font-size: .68rem; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .08em; margin-top: 3px; }
@@ -265,7 +265,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #C8A96E; outline-offs
 .service-slot-desc { font-size: .8rem; color: #888; margin: 0 0 12px; line-height: 1.4; }
 .service-slot-cta { font-size: .78rem; color: #8b5e3c; text-decoration: none; font-weight: 700; border: 1px solid #8b5e3c; padding: 5px 10px; border-radius: 2px; display: inline-block; }
 .service-slot-cta:hover { background: #f4f0eb; }
-.service-slot:hover { border-color: #8b5e3c; border-style: solid; }
+.service-slot:hover { border-color: #8b5e3c; box-shadow: 0 2px 8px rgba(139,94,60,.1); }
 
 /* ════════════════════════════════════════
    AGENT CTA SECTION
