@@ -259,7 +259,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid #C8A96E; outline-offs
 ════════════════════════════════════════ */
 .local-services { padding: 28px 0; }
 .services-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.service-slot { background: #faf7f3; border: 1px dashed #d4c5b0; border-radius: 4px; padding: 18px; text-align: center; }
+.service-slot { background: #faf7f3; border: 1px dashed #d4c5b0; border-radius: 4px; padding: 18px; text-align: center;
+  transition: border-color .15s, box-shadow .15s;
+}
 .service-slot-open { opacity: .85; }
 .service-slot-label { font-size: .88rem; font-weight: 700; color: #5a3e2b; margin-bottom: 6px; }
 .service-slot-desc { font-size: .8rem; color: #888; margin: 0 0 12px; line-height: 1.4; }
