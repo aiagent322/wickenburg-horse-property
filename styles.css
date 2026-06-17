@@ -32,7 +32,7 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; overflow-x: hidden; font-family: Georgia, serif; font-size: 16px; overflow-wrap: break-word; word-break: break-word; hyphens: auto; background: #fff; color: #1a1208; }
+body { margin: 0; overflow-x: hidden; font-family: Georgia, serif; font-size: 16px; line-height: 1.6; overflow-wrap: break-word; word-break: break-word; hyphens: auto; background: #fff; color: #1a1208; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 a, button { touch-action: manipulation; }
 a:focus-visible, button:focus-visible { outline: 3px solid #C8A96E; outline-offset: 2px; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce) {
@@ -296,9 +296,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid #C8A96E; outline-offs
    EXISTING INNER-PAGE CLASSES (preserved)
 ════════════════════════════════════════ */
 .page-main { max-width: 700px; margin: 20px auto 0; font-family: Georgia,serif; line-height: 1.7; padding: 0 24px 40px; overflow-wrap: break-word; word-break: break-word; }
-.page-main h1 { font-size: 1.8em; line-height: 1.3; margin-top: 8px; }
+.page-main h1 { font-size: 1.8em; line-height: 1.25; margin-top: 8px; }
 .page-main h2 { margin-top: 36px; font-size: 1.35em; line-height: 1.3; }
-.page-main h3 { font-size: 1.15em; margin-top: 28px; margin-bottom: 6px; line-height: 1.3; }
+.page-main h3 { font-size: 1.15em; margin-top: 28px; margin-bottom: 6px; line-height: 1.35; }
 .page-main p { margin-top: 0; }
 .page-main a { color: #2c5f2e; }
 .page-main ul { padding-left: 0; list-style: none; margin: 8px 0; }
@@ -337,7 +337,8 @@ h2.related-heading + ul { margin-top: 10px; }
    RESPONSIVE — TABLET 641px+
 ════════════════════════════════════════ */
 /* Hide secondary nav at narrow tablet to prevent 2-row wrap */
-@media (min-width: 641px) and (max-width: 767px) {
+/* Hide secondary nav at narrow tablet — 9 links need ~820px to fit single row */
+@media (min-width: 641px) and (max-width: 819px) {
   .nav-secondary-bar { display: none; }
 }
 @media (min-width: 641px) {
@@ -660,7 +661,10 @@ h2.related-heading + ul { margin-top: 10px; }
   .sticky-cta.visible {
     transform: translateY(0);
   }
-  /* Hide sticky CTA when mobile nav is open */
+  /* Scroll-lock + hide sticky CTA when mobile nav is open */
+  body.nav-open {
+    overflow: hidden;
+  }
   body.nav-open .sticky-cta {
     display: none;
   }
