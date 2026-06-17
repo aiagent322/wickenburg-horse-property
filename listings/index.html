@@ -52,12 +52,12 @@
   border: 1px solid #e8e0d8;
   border-radius: 3px;
   font-family: Georgia, serif;
-  font-size: .85rem;
+  font-size: 16px; /* 16px minimum prevents iOS auto-zoom on focus */
   background: #fff;
   color: #1a1208;
   width: 100%;
   box-sizing: border-box;
-  min-height: 40px;
+  min-height: 44px; /* WCAG touch target */
 }
 .filter-row input { grid-column: 1 / -1; }
 .filter-count { font-size: .8rem; color: #888; grid-column: 1 / -1; text-align: right; }
