@@ -37,6 +37,11 @@ a:focus-visible, button:focus-visible { outline: 3px solid #C8A96E; outline-offs
 .nav-mobile-menu a { display: block; padding: 13px 20px; font-family: Georgia,serif; font-size: 1rem; color: rgba(255,255,255,.9); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.06); }
 .nav-mobile-menu a:hover { background: rgba(255,255,255,.08); }
 .header-bb { display:flex; align-items:center; margin-left:auto; flex-shrink:0; }
+/* BB logo + contact btn hidden on mobile — toggle takes that space */
+@media (max-width: 640px) {
+  .header-bb { display: none; }
+  .nav-contact-btn { display: none; }
+}
 
 /* ════════════════════════════════════════
    HERO
@@ -188,7 +193,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #C8A96E; outline-offs
    BUYER'S GUIDES
 ════════════════════════════════════════ */
 .guides-section { padding: 28px 0; }
-.guide-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.guide-cards { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
 .guide-card { display: block; text-decoration: none; color: inherit; background: #faf7f3; border: 1px solid #e8e0d8; border-radius: 4px; padding: 18px; transition: border-color .15s, box-shadow .15s; }
 .guide-card:hover { border-color: #8b5e3c; box-shadow: 0 2px 6px rgba(139,94,60,.1); }
 .guide-card-full { grid-column: 1 / -1; background: #f4f9f4; border-color: #2c5f2e; border-left-width: 3px; }
@@ -304,14 +309,30 @@ h2.related-heading + ul { margin-top: 10px; }
 @media (min-width: 641px) {
   .hp-hero-wrap { height: 500px; }
   .hp-hero-title { font-size: 3.2rem; }
+  /* Editorial: feature left, stack right, explicit row anchoring */
   .editorial-grid { grid-template-columns: 1fr 1fr; }
-  .editorial-card-feature { grid-column: 1; grid-row: 1; }
-  .editorial-card-stack { grid-column: 2; }
+  .editorial-card-feature { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; }
+  .editorial-card-feature .editorial-card-desc { flex: 1; }
+  .editorial-card-stack { grid-column: 2; grid-row: 1; }
+  /* Corridors 2-col at tablet */
   .corridor-grid { grid-template-columns: 1fr 1fr; }
+  /* Corridor badge has room — no clip */
+  .corridor-badge { max-width: 120px; }
+  /* Guides 2-col */
   .guide-cards { grid-template-columns: 1fr 1fr; }
-  .services-grid { grid-template-columns: 1fr 1fr 1fr; }
+  /* Services — 3-col only above 800px, 1-col at 641–799px */
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  /* Stats unwrap */
   .stats-bar-inner { flex-wrap: nowrap; }
   .stat-divider { display: block; }
+  .stat-item { flex: none; padding: 14px 10px; }
+  .stat-number { font-size: 1.15rem; }
+  .stat-label { font-size: .68rem; }
+  /* Buy-sell consistent with other 641px breakpoints */
+  .buy-sell-grid { grid-template-columns: 1fr 1fr; }
+  .buy-sell-cta { width: auto; align-self: flex-start; }
+  /* Network footer 2-col at tablet */
+  .network-footer-grid { grid-template-columns: 1fr 1fr; gap: 20px 28px; }
 }
 
 /* ════════════════════════════════════════
@@ -320,8 +341,18 @@ h2.related-heading + ul { margin-top: 10px; }
 @media (min-width: 961px) {
   .hp-hero-wrap { height: 560px; }
   .hp-hero-title { font-size: 3.8rem; }
+  /* 3-col corridors */
   .corridor-grid { grid-template-columns: 1fr 1fr 1fr; }
+  /* Richer hover on desktop */
+  .corridor-card:hover { border-color: #8b5e3c; box-shadow: 0 4px 16px rgba(139,94,60,.14); transform: translateY(-1px); transition: border-color .15s, box-shadow .15s, transform .15s; }
+  /* 3-col services */
+  .services-grid { grid-template-columns: 1fr 1fr 1fr; }
+  /* 3-col footer */
   .network-footer-grid { grid-template-columns: repeat(3, 1fr); }
+  /* Buy-sell CTA min-width on desktop */
+  .buy-sell-cta { min-width: 180px; }
+  /* Wider stat bar breathing room */
+  .stat-item { padding: 16px 14px; }
 }
 
 /* ════════════════════════════════════════
@@ -352,13 +383,18 @@ h2.related-heading + ul { margin-top: 10px; }
 
   /* Stats bar */
   .stat-divider { display: none; }
-  .stats-bar-inner { justify-content: space-around; }
-  .stat-item { padding: 10px 4px; }
-  .stat-number { font-size: .95rem; }
-  .stat-label { font-size: .6rem; }
+  .stats-bar-inner { justify-content: space-around; flex-wrap: wrap; }
+  .stat-item { padding: 8px 6px; flex: 1 1 30%; min-width: 0; }
+  .stat-number { font-size: .88rem; }
+  .stat-label { font-size: .58rem; }
 
   /* Wrap */
   .hp-wrap { padding: 0 16px; }
+  .hp-intro p { font-size: 1rem; }
+
+  /* Section headings */
+  .section-heading { font-size: 1.2rem; }
+  .section-sub { font-size: .88rem; }
 
   /* Hero title on inner pages */
   .page-main { padding: 0 16px 40px; margin-top: 12px; }
@@ -381,7 +417,6 @@ h2.related-heading + ul { margin-top: 10px; }
   .hp-section ul li a { -webkit-line-clamp: 2; }
 
   /* New sections */
-  .section-heading { font-size: 1.25rem; }
   .expert-card { flex-direction: column; gap: 14px; }
   .guide-cards { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
@@ -389,7 +424,17 @@ h2.related-heading + ul { margin-top: 10px; }
   .editorial-card-stack { gap: 12px; }
   .agent-cta-buttons { flex-direction: column; align-items: center; }
   .agent-cta-buttons .hp-btn { width: 100%; max-width: 340px; text-align: center; }
-  .network-footer-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .network-footer-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Hero CTAs stack on narrow phones */
+  .hp-hero-ctas { flex-direction: column; gap: 8px; }
+  .hp-hero-ctas .hp-btn { text-align: center; }
+
+  /* Buy-sell CTA full width on mobile */
+  .buy-sell-cta { width: 100%; text-align: center; align-self: stretch; box-sizing: border-box; }
+
+  /* Breadcrumb top spacing — prevent flush against sticky nav */
+  .breadcrumb { padding-top: 14px; }
 
   /* Article list on mobile */
   .article-item { flex-direction: column; gap: 2px; }
@@ -685,6 +730,4 @@ h2.related-heading + ul { margin-top: 10px; }
 }
 .buy-sell-selling .buy-sell-cta:hover { background: #a06b44; }
 
-@media (min-width: 600px) {
-  .buy-sell-grid { grid-template-columns: 1fr 1fr; }
-}
+/* buy-sell mobile base stays 1-col; expands at 641px tablet block above */
