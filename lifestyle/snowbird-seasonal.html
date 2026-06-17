@@ -198,5 +198,24 @@
     </div>
   </div>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"e8b33bc79099427393f57bf292a402b7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+
+<!-- ── MOBILE STICKY CTA BAR ── -->
+<div class="sticky-cta" id="sticky-cta" aria-label="Find a horse property agent">
+  <span class="sticky-cta-label">Wickenburg Horse<br>Property Specialist</span>
+  <a href="https://www.horsepropertyagents.com/agents/?q=wickenburg" target="_blank" rel="noopener" class="sticky-cta-btn">Find an Agent</a>
+  <a href="/services/contact" class="sticky-cta-btn-secondary">Contact</a>
+</div>
+<script>
+(function(){
+  var bar = document.getElementById('sticky-cta');
+  if(!bar) return;
+  var shown = false;
+  function check(){
+    if(window.scrollY > 300 && !shown){ bar.classList.add('visible'); shown=true; }
+    else if(window.scrollY <= 300 && shown){ bar.classList.remove('visible'); shown=false; }
+  }
+  window.addEventListener('scroll', check, {passive:true});
+})();
+</script>
 </body>
 </html>
