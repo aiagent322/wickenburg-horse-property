@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Horse Properties For Sale — Wickenburg, AZ | WickenburgHorseProperty.com</title>
+<meta name="description" content="Wickenburg, AZ horse properties for sale — roping arenas, working ranches, luxury equestrian estates, and starter properties. Updated listings by local specialist agents.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://wickenburghorseproperty.com/listings/">
+<meta property="og:title" content="Horse Properties For Sale — Wickenburg, AZ">
+<meta property="og:description" content="Wickenburg, AZ horse properties — roping arenas, working ranches, luxury estates. Updated listings by local specialist agents.">
+<meta property="og:url" content="https://wickenburghorseproperty.com/listings/">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Wickenburg Horse Properties For Sale",
+  "description": "Current horse property listings in Wickenburg, Arizona — roping arenas, working ranches, luxury equestrian estates, and starter properties.",
+  "url": "https://wickenburghorseproperty.com/listings/"
+}
+</script>
+<style>
+/* ── Showcase-specific styles (complement styles.css) ── */
+.showcase-hero {
+  background: #1a1208;
+  padding: 36px 24px 28px;
+  text-align: center;
+  border-bottom: 3px solid #c9973a;
+}
+.showcase-hero h1 { color: #fff; font-size: 1.8rem; margin: 0 0 8px; line-height: 1.25; }
+.showcase-hero p { color: rgba(255,255,255,.7); font-size: .95rem; margin: 0 0 18px; }
+.showcase-filters {
+  background: #faf7f3;
+  border-bottom: 1px solid #e8e0d8;
+  padding: 12px 24px;
+  position: sticky;
+  top: 46px; /* nav height */
+  z-index: 50;
+}
+.filter-row { max-width: 760px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.filter-row select, .filter-row input {
+  padding: 8px 10px;
+  border: 1px solid #e8e0d8;
+  border-radius: 3px;
+  font-family: Georgia, serif;
+  font-size: .85rem;
+  background: #fff;
+  color: #1a1208;
+}
+.filter-row input { flex: 1; min-width: 160px; }
+.filter-count { font-size: .8rem; color: #888; margin-left: auto; white-space: nowrap; }
+
+.listings-wrap { max-width: 960px; margin: 0 auto; padding: 24px 24px 60px; }
+.listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+
+/* ── Property Card ── */
+.prop-card {
+  background: #fff;
+  border: 1px solid #e8e0d8;
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: border-color .15s, box-shadow .15s;
+}
+.prop-card:hover { border-color: #8b5e3c; box-shadow: 0 4px 14px rgba(139,94,60,.12); }
+.prop-card-photo {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, #f4f0eb 0%, #e8ddd2 100%);
+}
+.prop-card-photo-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #f4f0eb 0%, #e8ddd2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: #a09080;
+  font-size: .82rem;
+}
+.prop-card-photo-placeholder svg { opacity: .4; }
+.prop-card-status {
+  display: inline-block;
+  position: absolute;
+  top: 10px; left: 10px;
+  font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px;
+}
+.prop-card-wrap { position: relative; }
+.status-active  { background: #2c5f2e; color: #fff; }
+.status-pending { background: #c9973a; color: #1a1208; }
+.status-sold    { background: #555; color: #fff; }
+
+.prop-card-body { padding: 16px; }
+.prop-price { font-size: 1.2rem; font-weight: 700; color: #8b5e3c; margin: 0 0 3px; line-height: 1.1; }
+.prop-address { font-size: .92rem; font-weight: 700; color: #1a1208; margin: 0 0 2px; }
+.prop-location { font-size: .78rem; color: #888; margin: 0 0 10px; }
+.prop-specs { display: flex; flex-wrap: wrap; gap: 0 12px; margin: 0 0 10px; }
+.prop-spec { font-size: .78rem; color: #555; }
+.prop-spec strong { color: #1a1208; }
+.prop-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.prop-tag {
+  font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  background: #f4f0eb; color: #8b5e3c; padding: 2px 7px; border-radius: 2px;
+  border: 1px solid #e8e0d8;
+}
+.prop-tag-type { color: #2c5f2e; }
+.prop-desc { font-size: .83rem; color: #555; line-height: 1.55; margin: 0 0 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.prop-ctas { display: flex; gap: 8px; padding-top: 10px; border-top: 1px solid #f0ebe4; }
+.prop-cta-primary {
+  flex: 1; text-align: center; padding: 9px;
+  background: #2c5f2e; color: #fff; border: none; border-radius: 3px;
+  font-family: Georgia, serif; font-size: .82rem; font-weight: 700; cursor: pointer;
+  text-decoration: none; display: flex; align-items: center; justify-content: center;
+}
+.prop-cta-primary:hover { background: #1f4421; }
+.prop-cta-secondary {
+  padding: 9px 12px; background: transparent; color: #8b5e3c;
+  border: 1px solid #8b5e3c; border-radius: 3px;
+  font-family: Georgia, serif; font-size: .82rem; cursor: pointer; text-decoration: none;
+  display: flex; align-items: center;
+}
+.prop-cta-secondary:hover { background: #f4f0eb; }
+
+/* ── No results ── */
+.no-results { text-align: center; padding: 60px 20px; color: #888; }
+.no-results h3 { color: #1a1208; margin: 0 0 8px; }
+.no-results p { font-size: .9rem; margin: 0 0 16px; }
+
+/* ── Loading ── */
+.loading-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.skeleton-card { background: #f4f0eb; border-radius: 4px; overflow: hidden; animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+.skeleton-photo { height: 200px; background: #e8ddd2; }
+.skeleton-body { padding: 16px; }
+.skeleton-line { height: 14px; background: #e8ddd2; border-radius: 2px; margin-bottom: 10px; }
+.skeleton-line.w60 { width: 60%; }
+.skeleton-line.w80 { width: 80%; }
+.skeleton-line.w40 { width: 40%; }
+
+/* ── Agent CTA ── */
+.agent-strip {
+  background: #1a1208;
+  padding: 28px 24px;
+  text-align: center;
+  margin-top: 40px;
+}
+.agent-strip h2 { color: #c9973a; font-size: 1.2rem; margin: 0 0 8px; }
+.agent-strip p { color: rgba(255,255,255,.7); font-size: .9rem; margin: 0 0 16px; max-width: 540px; margin-left: auto; margin-right: auto; }
+.agent-strip-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ── Inquiry Modal ── */
+.inquiry-modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.55); z-index: 300;
+  align-items: center; justify-content: center; padding: 20px;
+}
+.inquiry-modal-overlay.open { display: flex; }
+.inquiry-modal {
+  background: #faf7f3; border-radius: 6px; width: 100%; max-width: 480px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
+}
+.inquiry-header { padding: 16px 20px; border-bottom: 1px solid #e8e0d8; display: flex; align-items: center; justify-content: space-between; }
+.inquiry-header h3 { margin: 0; font-size: 1rem; }
+.inquiry-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #888; }
+.inquiry-body { padding: 20px; }
+.inquiry-body .field { margin-bottom: 12px; }
+.inquiry-body label { display: block; font-size: .75rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+.inquiry-body input, .inquiry-body textarea, .inquiry-body select {
+  width: 100%; padding: 9px 10px; border: 1px solid #e8e0d8; border-radius: 3px;
+  font-family: Georgia, serif; font-size: .9rem; background: #fff;
+}
+.inquiry-body textarea { resize: vertical; min-height: 80px; }
+.inquiry-footer { padding: 14px 20px; border-top: 1px solid #e8e0d8; display: flex; gap: 8px; justify-content: flex-end; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .showcase-hero h1 { font-size: 1.35rem; }
+  .showcase-filters { padding: 10px 16px; top: 46px; }
+  .listings-wrap { padding: 16px 16px 80px; }
+  .listings-grid { grid-template-columns: 1fr; }
+  .prop-ctas { flex-direction: column; }
+  .prop-cta-primary, .prop-cta-secondary { text-align: center; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV (matches site template) -->
+<nav id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <span class="logo-full">WickenburgHorseProperty.com</span>
+      <span class="logo-short">Wickenburg HP</span>
+    </a>
+    <a href="/services/contact" class="nav-contact-btn" style="display:inline-flex;align-items:center;gap:5px;background:#2c5f2e;color:#fff;border-radius:3px;padding:6px 12px;font-size:.78rem;font-weight:700;text-decoration:none;white-space:nowrap;margin-left:10px;font-family:Georgia,serif;">Contact Us</a>
+    <button class="nav-toggle" id="nav-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-primary">
+      <li><a href="/neighborhoods/">Neighborhoods</a></li>
+      <li><a href="/guides/">Buyer's Guides</a></li>
+      <li><a href="/agents.html">Agents</a></li>
+      <li><a href="/articles/">Articles</a></li>
+      <li><a href="/services/sell-your-property.html">Sell</a></li>
+      <li><a href="https://www.horsepropertyagents.com/agents/?q=wickenburg" target="_blank" rel="noopener">Find an Agent</a></li>
+    </ul>
+  </div>
+  <div class="nav-secondary-bar">
+    <ul class="nav-secondary">
+      <li><a href="/neighborhoods/constellation-road.html">Constellation Road</a></li>
+      <li><a href="/neighborhoods/hassayampa-valley.html">Hassayampa Valley</a></li>
+      <li><a href="/neighborhoods/box-canyon.html">Box Canyon</a></li>
+      <li><a href="/neighborhoods/vulture-mine-road.html">Vulture Mine Road</a></li>
+      <li><a href="/neighborhoods/morristown.html">Morristown</a></li>
+      <li><a href="/neighborhoods/congress.html">Congress</a></li>
+      <li><a href="/guides/water-wells.html">Wells &amp; Water</a></li>
+      <li><a href="/guides/zoning.html">Zoning</a></li>
+      <li><a href="/guides/arena-footing.html">Arena Footing</a></li>
+    </ul>
+  </div>
+  <ul class="nav-mobile-menu" id="mobile-menu">
+    <li><a href="/services/contact">📬 Contact Us</a></li>
+    <li><a href="/neighborhoods/">Neighborhoods</a></li>
+    <li><a href="/guides/">Buyer's Guides</a></li>
+    <li><a href="/agents.html">Agents</a></li>
+    <li><a href="/articles/">Articles</a></li>
+    <li><a href="/services/sell-your-property.html">🏡 Sell Your Property</a></li>
+    <li><a href="https://www.horsepropertyagents.com/agents/?q=wickenburg" target="_blank" rel="noopener">Find an Agent &#8594;</a></li>
+  </ul>
+</nav>
+<script>
+  document.getElementById('nav-btn').addEventListener('click',function(){
+    document.getElementById('site-nav').classList.toggle('open');
+  });
+  document.addEventListener('click',function(e){
+    var n=document.getElementById('site-nav');
+    if(n&&!n.contains(e.target)) n.classList.remove('open');
+  });
+</script>
+
+<!-- ── Showcase Hero ── -->
+<div class="showcase-hero">
+  <h1>Wickenburg Horse Properties For Sale</h1>
+  <p>Roping arenas &nbsp;·&nbsp; Working ranches &nbsp;·&nbsp; Luxury estates &nbsp;·&nbsp; Starter properties</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="/neighborhoods/" class="hp-btn hp-btn-outline" style="border-color:rgba(255,255,255,.4);color:#fff;font-size:.85rem;padding:9px 18px">Explore Corridors</a>
+    <button onclick="openInquiry(null)" class="hp-btn hp-btn-primary" style="font-size:.85rem;padding:9px 18px">Talk to an Agent</button>
+  </div>
+</div>
+
+<!-- ── Filters ── -->
+<div class="showcase-filters">
+  <div class="filter-row">
+    <input type="text" id="search" placeholder="Search address, MLS#, corridor…" oninput="renderShowcase()">
+    <select id="f-status" onchange="renderShowcase()">
+      <option value="active-pending">Active &amp; Pending</option>
+      <option value="active">Active Only</option>
+      <option value="pending">Pending Only</option>
+      <option value="sold">Recently Sold</option>
+      <option value="all">All Listings</option>
+    </select>
+    <select id="f-type" onchange="renderShowcase()">
+      <option value="">All Types</option>
+      <option>Roping Arena Property</option>
+      <option>Working Ranch</option>
+      <option>Luxury Estate</option>
+      <option>Starter Horse Property</option>
+      <option>Trail Access Property</option>
+      <option>Hobby Farm</option>
+    </select>
+    <select id="f-corridor" onchange="renderShowcase()">
+      <option value="">All Corridors</option>
+      <option>Constellation Road</option>
+      <option>Hassayampa Valley</option>
+      <option>Box Canyon</option>
+      <option>Vulture Mine Road</option>
+      <option>Morristown</option>
+      <option>Congress</option>
+    </select>
+    <select id="f-price" onchange="renderShowcase()">
+      <option value="">Any Price</option>
+      <option value="0-500">Under $500K</option>
+      <option value="500-1000">$500K–$1M</option>
+      <option value="1000-2000">$1M–$2M</option>
+      <option value="2000+">$2M+</option>
+    </select>
+    <span class="filter-count" id="result-count"></span>
+  </div>
+</div>
+
+<!-- ── Listings ── -->
+<div class="listings-wrap">
+  <div id="listings-output">
+    <!-- Skeleton loading state -->
+    <div class="loading-grid" id="skeleton">
+      ${[1,2,3,4,5,6].map(() => `
+      <div class="skeleton-card">
+        <div class="skeleton-photo"></div>
+        <div class="skeleton-body">
+          <div class="skeleton-line w40"></div>
+          <div class="skeleton-line w80"></div>
+          <div class="skeleton-line w60"></div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <!-- Agent CTA strip -->
+  <div class="agent-strip">
+    <h2>Don't See What You're Looking For?</h2>
+    <p>Not every Wickenburg horse property reaches the public market. The best properties often sell before the sign goes in the ground. A local specialist knows what's coming available — and can match your criteria to off-market inventory.</p>
+    <div class="agent-strip-btns">
+      <a href="https://www.horsepropertyagents.com/agents/?q=wickenburg" target="_blank" rel="noopener" class="hp-btn hp-btn-primary">Find a Wickenburg Specialist</a>
+      <button onclick="openInquiry(null)" class="hp-btn hp-btn-outline">Send Property Criteria</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Inquiry Modal ── -->
+<div class="inquiry-modal-overlay" id="inquiry-modal">
+  <div class="inquiry-modal">
+    <div class="inquiry-header">
+      <h3 id="inquiry-title">Inquire About This Property</h3>
+      <button class="inquiry-close" onclick="closeInquiry()">×</button>
+    </div>
+    <div class="inquiry-body">
+      <div class="field">
+        <label>Property</label>
+        <input type="text" id="inq-property" readonly style="background:#f4f0eb;color:#888">
+      </div>
+      <div class="field">
+        <label>Your Name *</label>
+        <input type="text" id="inq-name" placeholder="Jane Smith">
+      </div>
+      <div class="field">
+        <label>Phone *</label>
+        <input type="tel" id="inq-phone" placeholder="(602) 555-0100">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="inq-email" placeholder="jane@example.com">
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea id="inq-message" placeholder="I'm interested in this property. I have horses and am looking for…"></textarea>
+      </div>
+      <div class="field">
+        <label>Timeline</label>
+        <select id="inq-timeline">
+          <option>Ready to buy now</option>
+          <option>Within 3 months</option>
+          <option>3–6 months</option>
+          <option>Just researching</option>
+        </select>
+      </div>
+    </div>
+    <div class="inquiry-footer">
+      <button class="hp-btn hp-btn-outline" onclick="closeInquiry()" style="padding:9px 16px">Cancel</button>
+      <button class="hp-btn hp-btn-primary" onclick="submitInquiry()" style="padding:9px 16px">Send Inquiry</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Mobile sticky CTA ── -->
+<div class="sticky-cta" id="sticky-cta">
+  <span class="sticky-cta-label">Wickenburg Horse<br>Property Specialist</span>
+  <a href="https://www.horsepropertyagents.com/agents/?q=wickenburg" target="_blank" rel="noopener" class="sticky-cta-btn">Find an Agent</a>
+  <a href="/services/contact" class="sticky-cta-btn-secondary">Contact</a>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════
+// CONFIGURATION — update per city clone
+// ════════════════════════════════════════════════════════
+const SB_URL   = 'https://ykkfziyxipeuugocwswo.supabase.co';
+const SB_KEY   = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlra2Z6aXl4aXBldXVnb2N3c3dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NzIyMDUsImV4cCI6MjA4OTU0ODIwNX0.BbTuMNHEXm8PUjFgKc0Te6rjoW7ns-2A8dzCtShV8-4';
+const TABLE    = 'listings';
+const CONTACT_ENDPOINT = '/services/contact';                 // ← or your form endpoint
+
+// ════════════════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════════════════
+let listings = [];
+
+async function loadListings() {
+  // Show skeleton, then real data
+  try {
+    const resp = await fetch(
+      `${SB_URL}/rest/v1/${TABLE}?select=*&status=neq.Draft&order=list_date.desc`,
+      { headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY } }
+    );
+    if (!resp.ok) throw new Error('fetch failed');
+    listings = await resp.json();
+  } catch(e) {
+    // Fall back to empty — show empty state
+    listings = [];
+  }
+  document.getElementById('skeleton').remove();
+  renderShowcase();
+}
+
+// ════════════════════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════════════════════
+function getFiltered() {
+  const q      = document.getElementById('search').value.toLowerCase();
+  const status = document.getElementById('f-status').value;
+  const type   = document.getElementById('f-type').value;
+  const corr   = document.getElementById('f-corridor').value;
+  const priceR = document.getElementById('f-price').value;
+
+  return listings.filter(l => {
+    const st = (l.status || '').toLowerCase();
+    if (status === 'active'         && st !== 'active')  return false;
+    if (status === 'pending'        && st !== 'pending') return false;
+    if (status === 'sold'           && st !== 'sold')    return false;
+    if (status === 'active-pending' && st !== 'active' && st !== 'pending') return false;
+    if (type && l.prop_type !== type) return false;
+    if (corr && l.corridor !== corr) return false;
+    if (q) {
+      const haystack = [l.address, l.corridor, l.prop_type, l.mls_number, l.description].join(' ').toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    if (priceR) {
+      const p = (l.price || 0) / 1000;
+      if (priceR === '0-500'     && p >= 500)  return false;
+      if (priceR === '500-1000'  && (p < 500  || p >= 1000)) return false;
+      if (priceR === '1000-2000' && (p < 1000 || p >= 2000)) return false;
+      if (priceR === '2000+'     && p < 2000) return false;
+    }
+    return true;
+  });
+}
+
+function renderShowcase() {
+  const filtered = getFiltered();
+  document.getElementById('result-count').textContent = filtered.length + ' listing' + (filtered.length !== 1 ? 's' : '');
+
+  const out = document.getElementById('listings-output');
+  if (!filtered.length) {
+    out.innerHTML = `<div class="no-results">
+      <div style="font-size:2.5rem;margin-bottom:12px">🏡</div>
+      <h3>No listings match your filters</h3>
+      <p>Try broadening your search, or contact us about upcoming inventory.</p>
+      <button onclick="clearFilters()" class="hp-btn hp-btn-outline" style="margin-right:8px">Clear Filters</button>
+      <button onclick="openInquiry(null)" class="hp-btn hp-btn-primary">Contact an Agent</button>
+    </div>`;
+    return;
+  }
+  out.innerHTML = `<div class="listings-grid">${filtered.map(renderCard).join('')}</div>`;
+}
+
+function renderCard(l) {
+  const price = l.price ? '$' + parseInt(l.price).toLocaleString() : 'Price Upon Request';
+  const st = (l.status || 'Active');
+  const statusClass = { Active:'status-active', Pending:'status-pending', Sold:'status-sold' }[st] || 'status-active';
+  const photo = l.photo_main
+    ? `<img class="prop-card-photo" src="${l.photo_main}" alt="${l.address}, Wickenburg AZ horse property" loading="lazy" onerror="this.outerHTML='<div class=prop-card-photo-placeholder><svg width=32 height=32 viewBox=0,0,24,24 fill=none stroke=currentColor stroke-width=1.5><path d=M3,9l9-7,9,7v11a2,2,0,0,1-2,2H5a2,2,0,0,1-2-2z/><polyline points=9,22,9,12,15,12,15,22/></svg>No Photo</div>'">`
+    : `<div class="prop-card-photo-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>No Photo Yet</span></div>`;
+  const specs = [
+    l.acres        ? `<span class="prop-spec"><strong>${l.acres}</strong> ac</span>` : '',
+    l.beds         ? `<span class="prop-spec"><strong>${l.beds}</strong> bd</span>` : '',
+    l.baths        ? `<span class="prop-spec"><strong>${l.baths}</strong> ba</span>` : '',
+    l.sqft         ? `<span class="prop-spec"><strong>${parseInt(l.sqft).toLocaleString()}</strong> sf</span>` : '',
+    l.stalls       ? `<span class="prop-spec"><strong>${l.stalls}</strong> stalls</span>` : '',
+    l.well_gpm     ? `<span class="prop-spec"><strong>${l.well_gpm}</strong> GPM</span>` : '',
+  ].filter(Boolean).join('');
+  const tags = [
+    l.prop_type  ? `<span class="prop-tag prop-tag-type">${l.prop_type}</span>` : '',
+    l.corridor   ? `<span class="prop-tag">${l.corridor}</span>` : '',
+    ...(l.tags || []).slice(0,2).map(t => `<span class="prop-tag">${t}</span>`),
+  ].filter(Boolean).join('');
+  const desc = l.description ? `<p class="prop-desc">${l.description}</p>` : '';
+  const soldLine = st === 'Sold' && l.sold_price ? `<div style="font-size:.78rem;color:#888;margin-top:2px">Sold: $${parseInt(l.sold_price).toLocaleString()}</div>` : '';
+  const mlsLine = l.mls_number ? `<div style="font-size:.72rem;color:#aaa;margin-bottom:6px">MLS# ${l.mls_number}</div>` : '';
+
+  return `
+<div class="prop-card" onclick="openInquiry('${l.slug}','${l.address.replace(/'/g,"\\'")}')">
+  <div class="prop-card-wrap">
+    ${photo}
+    <span class="prop-card-status ${statusClass}">${st}</span>
+  </div>
+  <div class="prop-card-body">
+    <div class="prop-price">${price}${soldLine}</div>
+    <div class="prop-address">${l.address}</div>
+    <div class="prop-location">${l.city || 'Wickenburg'}, ${l.state_zip || 'AZ'}</div>
+    ${mlsLine}
+    <div class="prop-specs">${specs}</div>
+    <div class="prop-tags">${tags}</div>
+    ${desc}
+    <div class="prop-ctas" onclick="event.stopPropagation()">
+      <button class="prop-cta-primary" onclick="openInquiry('${l.slug}','${l.address.replace(/'/g,"\\'")}')">Request Info</button>
+      ${l.mls_link ? `<a href="${l.mls_link}" target="_blank" rel="noopener" class="prop-cta-secondary">MLS ↗</a>` : ''}
+      ${l.tour_link ? `<a href="${l.tour_link}" target="_blank" rel="noopener" class="prop-cta-secondary">Tour ↗</a>` : ''}
+    </div>
+  </div>
+</div>`;
+}
+
+function clearFilters() {
+  document.getElementById('search').value = '';
+  document.getElementById('f-status').value = 'active-pending';
+  document.getElementById('f-type').value = '';
+  document.getElementById('f-corridor').value = '';
+  document.getElementById('f-price').value = '';
+  renderShowcase();
+}
+
+// ════════════════════════════════════════════════════════
+// INQUIRY MODAL
+// ════════════════════════════════════════════════════════
+let inquirySlug = null;
+
+function openInquiry(slug, address) {
+  inquirySlug = slug;
+  document.getElementById('inq-property').value = address || 'General Inquiry — Wickenburg Horse Properties';
+  document.getElementById('inquiry-title').textContent = address ? 'Inquire: ' + address : 'Contact a Wickenburg Specialist';
+  document.getElementById('inq-name').value = '';
+  document.getElementById('inq-phone').value = '';
+  document.getElementById('inq-email').value = '';
+  document.getElementById('inq-message').value = address ? `I'm interested in ${address}. ` : '';
+  document.getElementById('inquiry-modal').classList.add('open');
+}
+
+function closeInquiry() {
+  document.getElementById('inquiry-modal').classList.remove('open');
+}
+
+function submitInquiry() {
+  const name  = document.getElementById('inq-name').value.trim();
+  const phone = document.getElementById('inq-phone').value.trim();
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  // Build form data and redirect to contact page, or POST to endpoint
+  const prop  = document.getElementById('inq-property').value;
+  const email = document.getElementById('inq-email').value.trim();
+  const msg   = document.getElementById('inq-message').value.trim();
+  const tl    = document.getElementById('inq-timeline').value;
+  // Redirect to contact page with prefill params (simple, no server needed)
+  const params = new URLSearchParams({ name, phone, email, subject: 'Property Inquiry: ' + prop, message: msg + '\n\nTimeline: ' + tl });
+  window.location.href = CONTACT_ENDPOINT + '?' + params.toString();
+}
+
+// ════════════════════════════════════════════════════════
+// STICKY CTA
+// ════════════════════════════════════════════════════════
+(function(){
+  var bar = document.getElementById('sticky-cta');
+  if(!bar) return;
+  var shown = false;
+  function check(){
+    if(window.scrollY > 300 && !shown){ bar.classList.add('visible'); shown=true; }
+    else if(window.scrollY <= 300 && shown){ bar.classList.remove('visible'); shown=false; }
+  }
+  window.addEventListener('scroll', check, {passive:true});
+})();
+
+// ════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('inquiry-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeInquiry();
+  });
+
+  if (SB_URL.includes('supabase.co') && !SB_URL.includes('SUPABASE_PROJECT_ID')) {
+    loadListings();
+  } else {
+    // No Supabase configured yet — show setup message
+    document.getElementById('skeleton').remove();
+    document.getElementById('listings-output').innerHTML = `
+      <div class="no-results">
+        <div style="font-size:2rem;margin-bottom:10px">⚙️</div>
+        <h3>Listings Coming Soon</h3>
+        <p>This showcase will display active horse property listings once the agent connects their listing dashboard.</p>
+        <a href="https://www.horsepropertyagents.com/agents/?q=wickenburg" target="_blank" class="hp-btn hp-btn-primary">Find a Wickenburg Agent</a>
+      </div>`;
+    document.getElementById('result-count').textContent = '';
+  }
+});
+</script>
+
+<!-- Network Footer -->
+<footer class="network-footer">
+  <p class="network-footer-label">Horse Property Resources</p>
+  <div class="network-footer-grid">
+    <div class="network-footer-item">
+      <a href="https://www.horsepropertyagents.com" class="network-footer-link">Horse Property Agents</a>
+      <p class="network-footer-desc">Find a specialized real estate agent who understands the unique demands of buying and selling horse property.</p>
+    </div>
+    <div class="network-footer-item">
+      <a href="https://www.horsepropertyfinancing.com" class="network-footer-link">Horse Property Financing</a>
+      <p class="network-footer-desc">Loan products and financing options designed specifically for equestrian and horse property purchases.</p>
+    </div>
+    <div class="network-footer-item">
+      <a href="https://www.horsepropertyguide.com" class="network-footer-link">Horse Property Guide</a>
+      <p class="network-footer-desc">The complete buyer's guide to evaluating, purchasing, and owning horse property across the United States.</p>
+    </div>
+    <div class="network-footer-item">
+      <a href="https://teamroping.ai" class="network-footer-link">TeamRoping.AI</a>
+      <p class="network-footer-desc">Events near Wickenburg — jackpot ropings, competitions, and the Arizona roping event calendar.</p>
+    </div>
+    <div class="network-footer-item">
+      <a href="https://horsecalendar.ai" class="network-footer-link">HorseCalendar.AI</a>
+      <p class="network-footer-desc">Arizona horse events — shows, clinics, rodeos, and equestrian competitions statewide.</p>
+    </div>
+    <div class="network-footer-item">
+      <a href="https://bridleandbit.com" class="network-footer-link">Bridle &amp; Bit Magazine</a>
+      <p class="network-footer-desc">Arizona's premier equestrian publication since 1978 — interviews, coverage, and the Arizona horse community.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
