@@ -239,7 +239,7 @@
       <span class="logo-short">Wickenburg HP</span>
     </a>
     <a href="/services/contact" class="nav-contact-btn">Contact Us</a>
-    <button class="nav-toggle" id="nav-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" id="nav-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
     <ul class="nav-primary">
       <li><a href="/neighborhoods/">Neighborhoods</a></li>
       <li><a href="/guides/">Buyer's Guides</a></li>
@@ -281,15 +281,18 @@
   </ul>
 </nav>
 <script>
-  document.getElementById('nav-btn').addEventListener('click',function(){
+  var navBtn=document.getElementById('nav-btn');
+  navBtn.addEventListener('click',function(){
     var open=document.getElementById('site-nav').classList.toggle('open');
     document.body.classList.toggle('nav-open',open);
+    navBtn.setAttribute('aria-expanded',open?'true':'false');
   });
   document.addEventListener('click',function(e){
     var n=document.getElementById('site-nav');
     if(n&&!n.contains(e.target)){
       n.classList.remove('open');
       document.body.classList.remove('nav-open');
+      navBtn.setAttribute('aria-expanded','false');
     }
   });
 </script>
