@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /listings-dashboard
 
-Sitemap: https://wickenburg-horse-property.pages.dev/sitemap.xml
+Sitemap: https://wickenburghorseproperty.com/sitemap.xml
