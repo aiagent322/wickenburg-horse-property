@@ -417,3 +417,40 @@ h2.related-heading + ul { margin-top: 10px; }
   .corridor-badge { display: none; }
   .network-footer-grid { grid-template-columns: 1fr; }
 }
+
+/* ════════════════════════════════════════
+   BREADCRUMB — inner pages
+════════════════════════════════════════ */
+.breadcrumb { margin: 0; padding: 10px 0 8px; }
+.bc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0; }
+.bc-list li { display: flex; align-items: center; }
+.bc-link { font-size: .78rem; color: #2c5f2e; text-decoration: none; font-family: Georgia, serif; }
+.bc-link:hover { text-decoration: underline; }
+.bc-current { font-size: .78rem; color: #888; font-family: Georgia, serif; }
+.bc-sep { font-size: .78rem; color: #bbb; padding: 0 5px; line-height: 1; }
+
+/* ════════════════════════════════════════
+   PAGE HERO IMAGE — inner pages
+════════════════════════════════════════ */
+.page-hero-img {
+  width: calc(100% + 48px);
+  margin-left: -24px;
+  height: 220px;
+  background-size: cover;
+  background-position: center 40%;
+  margin-bottom: 20px;
+  display: block;
+}
+@media (min-width: 641px) {
+  .page-hero-img { height: 280px; }
+}
+@media (max-width: 640px) {
+  .page-hero-img {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    height: 180px;
+  }
+}
+@media (max-width: 360px) {
+  .page-hero-img { height: 150px; }
+}
