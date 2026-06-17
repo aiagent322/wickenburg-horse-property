@@ -173,11 +173,15 @@
 </nav>
 <script>
   document.getElementById('nav-btn').addEventListener('click',function(){
-    document.getElementById('site-nav').classList.toggle('open');
+    var open=document.getElementById('site-nav').classList.toggle('open');
+    document.body.classList.toggle('nav-open',open);
   });
   document.addEventListener('click',function(e){
     var n=document.getElementById('site-nav');
-    if(n&&!n.contains(e.target)) n.classList.remove('open');
+    if(n&&!n.contains(e.target)){
+      n.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }
   });
 </script>
 <main id="main-content" class="page-main">
