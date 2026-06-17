@@ -324,6 +324,8 @@ h2.related-heading + ul { margin-top: 10px; }
 .hp-hero p { font-size: 1.1em; margin: 0 0 16px; color: #444; }
 .hp-cta { display: block; margin: 0 auto; padding: 15px 20px; background: #8b5e3c; color: #fff; text-decoration: none; font-size: 1em; border-radius: 4px; text-align: center; width: 100%; max-width: 340px; box-sizing: border-box; font-family: Georgia,serif; line-height: 1.45; }
 .hp-cta:hover { background: #a06b44; }
+.page-main .hp-cta,
+.page-main a.hp-cta { color: #fff !important; font-weight: 700; }
 .hp-hr { border: none; border-top: 1px solid #e8e0d8; margin: 4px 0; }
 .hp-section { padding: 24px 0; }
 .hp-section h2 { font-size: 1.35em; margin: 0 0 14px; }
