@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listings Dashboard — WickenburgHorseProperty.com</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+/* ── Reset + Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+:root {
+  --brown:   #8b5e3c;
+  --brown-d: #6e4a2e;
+  --green:   #2c5f2e;
+  --green-d: #1f4421;
+  --gold:    #c9973a;
+  --cream:   #faf7f3;
+  --tan:     #f4f0eb;
+  --border:  #e0d6cc;
+  --ink:     #1a1208;
+  --ink-lt:  #7a6a58;
+  --radius:  4px;
+  --header-h: 52px;
+  --red:     #c0392b;
+  --red-lt:  #fff0ee;
+}
+body { margin: 0; font-family: Georgia, serif; background: var(--tan); color: var(--ink); font-size: 15px; }
+a { color: var(--green); }
+button, input, select, textarea { font-family: Georgia, serif; font-size: 14px; }
+h2 { font-size: 1.1rem; margin: 0 0 14px; }
+
+/* ── Header ── */
+.header {
+  background: var(--brown-d);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--gold);
+}
+.header-title { color: #fff; font-weight: 700; font-size: .95rem; flex: 1; }
+.header-title span { color: var(--gold); }
+.header-site { font-size: .75rem; color: rgba(255,255,255,.55); }
+#user-chip { font-size: .75rem; color: rgba(255,255,255,.8); cursor: pointer; padding: 5px 10px; border: 1px solid rgba(255,255,255,.2); border-radius: 3px; }
+#user-chip:hover { background: rgba(255,255,255,.1); }
+
+/* ── Layout ── */
+.layout { display: flex; min-height: calc(100vh - var(--header-h)); }
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--cream);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+}
+.main { flex: 1; padding: 20px 20px 60px; min-width: 0; }
+
+/* ── Sidebar Nav ── */
+.nav-section { padding: 0 12px 8px; font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-lt); margin-top: 12px; }
+.nav-item { display: flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: .85rem; color: var(--ink); cursor: pointer; border: none; background: none; width: 100%; text-align: left; }
+.nav-item:hover { background: var(--tan); }
+.nav-item.active { background: var(--tan); color: var(--brown); font-weight: 700; border-right: 3px solid var(--brown); }
+.nav-badge { margin-left: auto; font-size: .68rem; background: var(--gold); color: var(--ink); padding: 1px 6px; border-radius: 10px; font-weight: 700; }
+
+/* ── Toolbar ── */
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; position: sticky; top: var(--header-h); z-index: 20; background: var(--tan); padding: 10px 0 8px; }
+.search-wrap { position: relative; flex: 1; min-width: 180px; }
+.search-wrap input { width: 100%; padding: 9px 10px 9px 34px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--cream); color: var(--ink); font-size: 14px; }
+.search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--ink-lt); pointer-events: none; }
+select.filter { padding: 9px 10px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--cream); color: var(--ink); }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border: none; border-radius: var(--radius); font-size: .85rem; font-weight: 700; cursor: pointer; font-family: Georgia, serif; text-decoration: none; }
+.btn-primary { background: var(--green); color: #fff; }
+.btn-primary:hover { background: var(--green-d); }
+.btn-brown { background: var(--brown); color: #fff; }
+.btn-brown:hover { background: var(--brown-d); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+.btn-ghost:hover { background: var(--cream); }
+.btn-red { background: var(--red); color: #fff; }
+.btn-red:hover { background: #a93226; }
+.btn-sm { padding: 5px 10px; font-size: .78rem; }
+.toolbar-right { margin-left: auto; display: flex; gap: 8px; }
+
+/* ── Listings Grid ── */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.listing-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+}
+.listing-card:hover { border-color: var(--brown); box-shadow: 0 2px 8px rgba(139,94,60,.12); }
+.card-photo {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: var(--tan);
+  display: block;
+}
+.card-photo-placeholder {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, var(--tan) 0%, #e8ddd2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-lt);
+  font-size: .8rem;
+}
+.card-status-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+.badge-active { background: var(--green); color: #fff; }
+.badge-pending { background: var(--gold); color: var(--ink); }
+.badge-sold { background: #555; color: #fff; }
+.badge-draft { background: var(--border); color: var(--ink-lt); }
+.card-body { padding: 14px; }
+.card-price { font-size: 1.15rem; font-weight: 700; color: var(--brown); margin: 0 0 3px; }
+.card-address { font-size: .88rem; font-weight: 700; color: var(--ink); margin: 0 0 4px; }
+.card-specs { font-size: .78rem; color: var(--ink-lt); margin: 0 0 10px; }
+.card-specs span + span::before { content: ' · '; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.tag { font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--tan); color: var(--brown); padding: 2px 7px; border-radius: 2px; border: 1px solid var(--border); }
+.card-actions { display: flex; gap: 6px; padding-top: 10px; border-top: 1px solid var(--border); }
+
+/* ── Empty State ── */
+.empty { text-align: center; padding: 60px 20px; color: var(--ink-lt); }
+.empty-icon { font-size: 3rem; margin-bottom: 12px; }
+.empty h3 { margin: 0 0 8px; color: var(--ink); }
+.empty p { font-size: .9rem; margin: 0 0 20px; }
+
+/* ── Modal ── */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 400;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--cream);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-title { font-size: 1rem; font-weight: 700; margin: 0; }
+.modal-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--ink-lt); padding: 0; line-height: 1; }
+.modal-body { padding: 20px; }
+.modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
+
+/* ── Form ── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-grid .full { grid-column: 1 / -1; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label { font-size: .78rem; font-weight: 700; color: var(--ink-lt); text-transform: uppercase; letter-spacing: .1em; }
+.field input, .field select, .field textarea {
+  padding: 9px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  font-size: .9rem;
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--brown); }
+.field textarea { resize: vertical; min-height: 80px; }
+.field-hint { font-size: .72rem; color: var(--ink-lt); margin-top: 2px; }
+.section-label {
+  grid-column: 1 / -1;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 5px;
+  margin-top: 6px;
+}
+
+/* ── Photo Upload ── */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin-top: 8px; }
+.photo-thumb { position: relative; aspect-ratio: 4/3; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); }
+.photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-thumb .photo-remove { position: absolute; top: 3px; right: 3px; background: rgba(0,0,0,.6); color: #fff; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: .75rem; cursor: pointer; line-height: 1; }
+.photo-add { aspect-ratio: 4/3; border: 2px dashed var(--border); border-radius: 3px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-lt); font-size: .75rem; flex-direction: column; gap: 4px; }
+.photo-add:hover { border-color: var(--brown); color: var(--brown); }
+
+/* ── Stats Bar ── */
+.stats-bar { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+.stat-card { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; min-width: 110px; }
+.stat-val { font-size: 1.5rem; font-weight: 700; color: var(--brown); line-height: 1; }
+.stat-lbl { font-size: .7rem; color: var(--ink-lt); text-transform: uppercase; letter-spacing: .1em; margin-top: 3px; }
+
+/* ── Identity Modal ── */
+#identity-modal { background: rgba(0,0,0,.6); position: fixed; inset: 0; z-index: 500; display: none; align-items: center; justify-content: center; }
+#identity-modal.show { display: flex; }
+.identity-box { background: var(--cream); padding: 28px; border-radius: 6px; max-width: 360px; width: 90%; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,.2); }
+.identity-box h3 { margin: 0 0 8px; font-size: 1.1rem; }
+.identity-box p { font-size: .88rem; color: var(--ink-lt); margin: 0 0 16px; }
+.identity-box input { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 1rem; font-family: Georgia, serif; margin-bottom: 10px; }
+
+/* ── Toast ── */
+#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--ink); color: #fff; padding: 10px 20px; border-radius: 4px; font-size: .88rem; z-index: 600; transition: transform .25s ease; pointer-events: none; white-space: nowrap; }
+#toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── Loading ── */
+.spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Table View ── */
+.tbl-wrap { overflow-x: auto; }
+table.listings-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+table.listings-table th { text-align: left; padding: 9px 10px; border-bottom: 2px solid var(--border); font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-lt); white-space: nowrap; }
+table.listings-table td { padding: 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+table.listings-table tr:hover td { background: var(--tan); }
+.price-cell { font-weight: 700; color: var(--brown); white-space: nowrap; }
+.address-cell { font-weight: 700; max-width: 220px; }
+.address-cell span { display: block; font-size: .75rem; color: var(--ink-lt); font-weight: 400; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid .full { grid-column: 1; }
+  .stats-bar { gap: 8px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="header">
+  <div class="header-title">
+    <span>Listings Dashboard</span>
+    <span class="header-site"> · WickenburgHorseProperty.com</span>
+  </div>
+  <button id="user-chip" onclick="promptIdentity(true)">— Set Agent</button>
+  <a href="/listings/" target="_blank" class="btn btn-ghost btn-sm">View Showcase ↗</a>
+</header>
+
+<!-- ── Identity Modal ── -->
+<div id="identity-modal">
+  <div class="identity-box">
+    <div style="font-size:2rem;margin-bottom:10px">🏡</div>
+    <h3>Wickenburg Listings Dashboard</h3>
+    <p>Enter your agent name to track changes</p>
+    <input type="text" id="identity-input" placeholder="Your name" onkeydown="if(event.key==='Enter')setIdentity(this.value.trim())">
+    <button class="btn btn-brown" style="width:100%" onclick="setIdentity(document.getElementById('identity-input').value.trim())">Enter Dashboard</button>
+  </div>
+</div>
+
+<!-- ── Layout ── -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="nav-section">Listings</div>
+    <button class="nav-item active" onclick="showView('active')">
+      <span>🟢</span> Active
+      <span class="nav-badge" id="badge-active">0</span>
+    </button>
+    <button class="nav-item" onclick="showView('pending')">
+      <span>🟡</span> Pending
+      <span class="nav-badge" id="badge-pending">0</span>
+    </button>
+    <button class="nav-item" onclick="showView('sold')">
+      <span>⚫</span> Sold
+      <span class="nav-badge" id="badge-sold">0</span>
+    </button>
+    <button class="nav-item" onclick="showView('draft')">
+      <span>📝</span> Drafts
+      <span class="nav-badge" id="badge-draft">0</span>
+    </button>
+    <button class="nav-item" onclick="showView('all')">
+      <span>📋</span> All Listings
+    </button>
+    <div class="nav-section" style="margin-top:16px">Views</div>
+    <button class="nav-item" id="view-grid-btn" onclick="setViewMode('grid')">
+      <span>⊞</span> Grid
+    </button>
+    <button class="nav-item" id="view-table-btn" onclick="setViewMode('table')">
+      <span>☰</span> Table
+    </button>
+    <div class="nav-section" style="margin-top:16px">Network</div>
+    <button class="nav-item" onclick="window.open('/','_blank')">
+      <span>🌐</span> Wickenburg Site
+    </button>
+  </nav>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Stats -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-card"><div class="stat-val" id="stat-active">–</div><div class="stat-lbl">Active</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-pending">–</div><div class="stat-lbl">Pending</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-sold">–</div><div class="stat-lbl">Sold YTD</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-avg">–</div><div class="stat-lbl">Avg Price</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-total">–</div><div class="stat-lbl">Total Value</div></div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search" placeholder="Search address, MLS#, area…" oninput="renderListings()">
+      </div>
+      <select class="filter" id="f-type" onchange="renderListings()">
+        <option value="">All Types</option>
+        <option>Roping Arena Property</option>
+        <option>Working Ranch</option>
+        <option>Luxury Estate</option>
+        <option>Starter Horse Property</option>
+        <option>Trail Access Property</option>
+        <option>Hobby Farm</option>
+      </select>
+      <select class="filter" id="f-corridor" onchange="renderListings()">
+        <option value="">All Corridors</option>
+        <option>Constellation Road</option>
+        <option>Hassayampa Valley</option>
+        <option>Box Canyon</option>
+        <option>Vulture Mine Road</option>
+        <option>Morristown</option>
+        <option>Congress</option>
+        <option>Wickenburg Town</option>
+      </select>
+      <select class="filter" id="f-price" onchange="renderListings()">
+        <option value="">Any Price</option>
+        <option value="0-500">Under $500K</option>
+        <option value="500-1000">$500K–$1M</option>
+        <option value="1000-2000">$1M–$2M</option>
+        <option value="2000+">$2M+</option>
+      </select>
+      <div class="toolbar-right">
+        <button class="btn btn-primary" onclick="openNewListing()">+ New Listing</button>
+      </div>
+    </div>
+
+    <!-- Grid / Table Container -->
+    <div id="listings-container"></div>
+
+  </main>
+</div>
+
+<!-- ── Add/Edit Listing Modal ── -->
+<div class="modal-overlay" id="listing-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title">New Listing</h2>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+
+        <div class="section-label">Property Address</div>
+        <div class="field full">
+          <label>Street Address *</label>
+          <input type="text" id="f-address" placeholder="12345 Constellation Road">
+        </div>
+        <div class="field">
+          <label>City</label>
+          <input type="text" id="f-city" value="Wickenburg" placeholder="Wickenburg">
+        </div>
+        <div class="field">
+          <label>State / Zip</label>
+          <input type="text" id="f-state-zip" value="AZ 85390" placeholder="AZ 85390">
+        </div>
+
+        <div class="section-label">Listing Details</div>
+        <div class="field">
+          <label>List Price *</label>
+          <input type="number" id="f-price" placeholder="850000" min="0" step="1000">
+          <span class="field-hint">Enter number only, no $ or commas</span>
+        </div>
+        <div class="field">
+          <label>MLS Number</label>
+          <input type="text" id="f-mls" placeholder="6789012">
+        </div>
+        <div class="field">
+          <label>Status *</label>
+          <select id="f-status">
+            <option value="Active">Active</option>
+            <option value="Pending">Pending</option>
+            <option value="Sold">Sold</option>
+            <option value="Draft">Draft (not public)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Listing Date</label>
+          <input type="date" id="f-list-date">
+        </div>
+        <div class="field">
+          <label>Sold Price</label>
+          <input type="number" id="f-sold-price" placeholder="820000" min="0" step="1000">
+          <span class="field-hint">Fill when status = Sold</span>
+        </div>
+        <div class="field">
+          <label>Sold Date</label>
+          <input type="date" id="f-sold-date">
+        </div>
+
+        <div class="section-label">Property Specs</div>
+        <div class="field">
+          <label>Acres *</label>
+          <input type="number" id="f-acres" placeholder="5.2" min="0" step="0.1">
+        </div>
+        <div class="field">
+          <label>Bedrooms</label>
+          <input type="number" id="f-beds" placeholder="3" min="0">
+        </div>
+        <div class="field">
+          <label>Bathrooms</label>
+          <input type="number" id="f-baths" placeholder="2" min="0" step="0.5">
+        </div>
+        <div class="field">
+          <label>Sq Ft (home)</label>
+          <input type="number" id="f-sqft" placeholder="2400" min="0">
+        </div>
+        <div class="field">
+          <label>Property Type *</label>
+          <select id="f-type-sel">
+            <option value="">Select type…</option>
+            <option>Roping Arena Property</option>
+            <option>Working Ranch</option>
+            <option>Luxury Estate</option>
+            <option>Starter Horse Property</option>
+            <option>Trail Access Property</option>
+            <option>Hobby Farm</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Corridor / Area *</label>
+          <select id="f-corridor-sel">
+            <option value="">Select area…</option>
+            <option>Constellation Road</option>
+            <option>Hassayampa Valley</option>
+            <option>Box Canyon</option>
+            <option>Vulture Mine Road</option>
+            <option>Morristown</option>
+            <option>Congress</option>
+            <option>Wickenburg Town</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>County</label>
+          <select id="f-county">
+            <option value="">Select…</option>
+            <option>Maricopa</option>
+            <option>Yavapai</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Year Built</label>
+          <input type="number" id="f-year" placeholder="2002" min="1900" max="2030">
+        </div>
+
+        <div class="section-label">Horse Facilities</div>
+        <div class="field">
+          <label>Stalls</label>
+          <input type="number" id="f-stalls" placeholder="4" min="0">
+        </div>
+        <div class="field">
+          <label>Arena Type</label>
+          <select id="f-arena">
+            <option value="">None / Unknown</option>
+            <option>Full Roping Arena (150×300+)</option>
+            <option>Riding Arena (standard)</option>
+            <option>Round Pen Only</option>
+            <option>Arena — Size Unknown</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Water Source</label>
+          <select id="f-water">
+            <option value="">Unknown</option>
+            <option>Private Well</option>
+            <option>Municipal Water</option>
+            <option>Well + Municipal</option>
+            <option>Hauled Water</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Well GPM</label>
+          <input type="number" id="f-gpm" placeholder="8" min="0">
+          <span class="field-hint">Gallons per minute if known</span>
+        </div>
+        <div class="field full">
+          <label>Horse Facility Tags</label>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px" id="tags-container">
+            <!-- checkboxes injected by JS -->
+          </div>
+        </div>
+
+        <div class="section-label">Photos &amp; Links</div>
+        <div class="field full">
+          <label>Primary Photo URL</label>
+          <input type="url" id="f-photo1" placeholder="https://…">
+          <span class="field-hint">Main card image — paste direct image URL or hosted photo URL</span>
+        </div>
+        <div class="field full">
+          <label>Additional Photos (one URL per line)</label>
+          <textarea id="f-photos" placeholder="https://photo2.jpg&#10;https://photo3.jpg" rows="3"></textarea>
+        </div>
+        <div class="field full">
+          <label>MLS / Zillow / Realtor.com Link</label>
+          <input type="url" id="f-mls-link" placeholder="https://www.zillow.com/homes/…">
+        </div>
+        <div class="field full">
+          <label>Virtual Tour Link</label>
+          <input type="url" id="f-tour" placeholder="https://my.matterport.com/…">
+        </div>
+
+        <div class="section-label">Description</div>
+        <div class="field full">
+          <label>Public Description</label>
+          <textarea id="f-desc" rows="5" placeholder="Horse-ready 5-acre ranchette on Constellation Road — sandy loam soil, 4-stall barn, 12×12 stalls, well at 8 GPM, mountain views…"></textarea>
+          <span class="field-hint">Shown on the public showcase. Write for a horse buyer, not a real estate algorithm.</span>
+        </div>
+        <div class="field full">
+          <label>Private Notes (not public)</label>
+          <textarea id="f-notes" rows="3" placeholder="Seller motivated, needs closing by end of month…"></textarea>
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="delete-btn" onclick="deleteListing()" style="margin-right:auto;display:none" title="Delete">🗑 Delete</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-brown" onclick="saveListing()">Save Listing</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Toast ── -->
+<div id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════════════
+// CONFIGURATION — update per city clone
+// ════════════════════════════════════════════════════════
+const SITE_NAME  = 'WickenburgHorseProperty.com';
+const CITY       = 'Wickenburg';
+const SB_URL     = 'https://ykkfziyxipeuugocwswo.supabase.co';
+const SB_KEY     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlra2Z6aXl4aXBldXVnb2N3c3dvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Mzk3MjIwNSwiZXhwIjoyMDg5NTQ4MjA1fQ.Qb5iS8fflfepdNvjf7fEUZmBGmYTY1pepVxsY8fshtk';
+const TABLE      = 'listings';
+
+const SB_HDR = {
+  'apikey': SB_KEY,
+  'Authorization': 'Bearer ' + SB_KEY,
+  'Content-Type': 'application/json',
+  'Prefer': 'return=minimal'
+};
+
+// ════════════════════════════════════════════════════════
+// FACILITY TAGS — checkboxes in the form
+// ════════════════════════════════════════════════════════
+const FACILITY_TAGS = [
+  'Roping Chute','Return Alley','Covered Arena','Wash Rack',
+  'Tack Room','Feed Room','Hay Storage','Mare Motel',
+  'Pasture Turnout','Cross-Fenced','BLM Access','Ag Exempt',
+  'RV Hookups','Guest Quarters','Caretaker Quarters','Shop/Garage'
+];
+
+// ════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════
+let listings     = [];
+let currentView  = 'active';
+let viewMode     = 'grid';
+let editingSlug  = null;
+let currentUser  = localStorage.getItem('hp_agent') || null;
+
+// ════════════════════════════════════════════════════════
+// IDENTITY
+// ════════════════════════════════════════════════════════
+function setIdentity(name) {
+  if (!name) return;
+  currentUser = name;
+  localStorage.setItem('hp_agent', name);
+  document.getElementById('identity-modal').classList.remove('show');
+  document.getElementById('user-chip').textContent = '👤 ' + name;
+}
+function promptIdentity(force) {
+  if (force || !currentUser) {
+    document.getElementById('identity-modal').classList.add('show');
+  }
+}
+function updateUserChip() {
+  const chip = document.getElementById('user-chip');
+  chip.textContent = currentUser ? '👤 ' + currentUser : '— Set Agent';
+}
+
+// ════════════════════════════════════════════════════════
+// SUPABASE HELPERS
+// ════════════════════════════════════════════════════════
+async function sbFetch(path, opts = {}) {
+  try {
+    const r = await fetch(SB_URL + path, { headers: SB_HDR, ...opts });
+    if (!r.ok) { console.warn('SB error', r.status, await r.text()); return null; }
+    return r.status === 204 ? true : r.json();
+  } catch(e) { console.warn('SB offline:', e.message); return null; }
+}
+
+async function loadFromSupabase() {
+  const data = await sbFetch(`/rest/v1/${TABLE}?select=*&order=list_date.desc`);
+  if (data && Array.isArray(data)) {
+    listings = data.map(rowToListing);
+    renderAll();
+    toast('Loaded ' + listings.length + ' listings');
+  }
+}
+
+async function saveToSupabase(listing) {
+  const row = listingToRow(listing);
+  return sbFetch(`/rest/v1/${TABLE}?on_conflict=slug`, {
+    method: 'POST',
+    headers: { ...SB_HDR, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+    body: JSON.stringify(row)
+  });
+}
+
+async function deleteFromSupabase(slug) {
+  return sbFetch(`/rest/v1/${TABLE}?slug=eq.${encodeURIComponent(slug)}`, {
+    method: 'DELETE'
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// DATA MAPPING — dashboard object ↔ Supabase row
+// ════════════════════════════════════════════════════════
+function listingToRow(l) {
+  return {
+    slug:         l.slug,
+    address:      l.address,
+    city:         l.city || CITY,
+    state_zip:    l.stateZip || 'AZ 85390',
+    price:        l.price ? parseInt(l.price) : null,
+    status:       l.status || 'Active',
+    mls_number:   l.mls || null,
+    list_date:    l.listDate || null,
+    sold_price:   l.soldPrice ? parseInt(l.soldPrice) : null,
+    sold_date:    l.soldDate || null,
+    acres:        l.acres ? parseFloat(l.acres) : null,
+    beds:         l.beds ? parseInt(l.beds) : null,
+    baths:        l.baths ? parseFloat(l.baths) : null,
+    sqft:         l.sqft ? parseInt(l.sqft) : null,
+    prop_type:    l.propType || null,
+    corridor:     l.corridor || null,
+    county:       l.county || null,
+    year_built:   l.yearBuilt ? parseInt(l.yearBuilt) : null,
+    stalls:       l.stalls ? parseInt(l.stalls) : null,
+    arena_type:   l.arenaType || null,
+    water_source: l.waterSource || null,
+    well_gpm:     l.wellGpm ? parseFloat(l.wellGpm) : null,
+    tags:         l.tags || [],
+    photo_main:   l.photoMain || null,
+    photos:       l.photos || [],
+    mls_link:     l.mlsLink || null,
+    tour_link:    l.tourLink || null,
+    description:  l.description || null,
+    notes:        l.notes || null,
+    changed_by:   currentUser || null,
+    updated_at:   new Date().toISOString()
+  };
+}
+
+function rowToListing(r) {
+  return {
+    slug:        r.slug,
+    address:     r.address,
+    city:        r.city || CITY,
+    stateZip:    r.state_zip || 'AZ 85390',
+    price:       r.price,
+    status:      r.status || 'Active',
+    mls:         r.mls_number || '',
+    listDate:    r.list_date || '',
+    soldPrice:   r.sold_price || '',
+    soldDate:    r.sold_date || '',
+    acres:       r.acres || '',
+    beds:        r.beds || '',
+    baths:       r.baths || '',
+    sqft:        r.sqft || '',
+    propType:    r.prop_type || '',
+    corridor:    r.corridor || '',
+    county:      r.county || '',
+    yearBuilt:   r.year_built || '',
+    stalls:      r.stalls || '',
+    arenaType:   r.arena_type || '',
+    waterSource: r.water_source || '',
+    wellGpm:     r.well_gpm || '',
+    tags:        r.tags || [],
+    photoMain:   r.photo_main || '',
+    photos:      r.photos || [],
+    mlsLink:     r.mls_link || '',
+    tourLink:    r.tour_link || '',
+    description: r.description || '',
+    notes:       r.notes || '',
+    updatedAt:   r.updated_at || ''
+  };
+}
+
+// ════════════════════════════════════════════════════════
+// SLUG GENERATOR
+// ════════════════════════════════════════════════════════
+function makeSlug(address) {
+  return address.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .substring(0, 60)
+    + '-' + Date.now().toString(36);
+}
+
+// ════════════════════════════════════════════════════════
+// LOCAL STORAGE FALLBACK
+// ════════════════════════════════════════════════════════
+function saveLocal() {
+  try { localStorage.setItem('hp_listings', JSON.stringify(listings)); } catch(e) {}
+}
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem('hp_listings');
+    if (raw) { listings = JSON.parse(raw); return true; }
+  } catch(e) {}
+  return false;
+}
+
+// ════════════════════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════════════════════
+function getFiltered() {
+  const q       = document.getElementById('search').value.toLowerCase();
+  const type    = document.getElementById('f-type').value;
+  const corr    = document.getElementById('f-corridor').value;
+  const priceR  = document.getElementById('f-price').value;
+
+  return listings.filter(l => {
+    // Status view filter
+    if (currentView !== 'all' && l.status.toLowerCase() !== currentView) return false;
+    // Search
+    if (q && !JSON.stringify(l).toLowerCase().includes(q)) return false;
+    // Type
+    if (type && l.propType !== type) return false;
+    // Corridor
+    if (corr && l.corridor !== corr) return false;
+    // Price range
+    if (priceR) {
+      const p = parseInt(l.price) / 1000;
+      if (priceR === '0-500'    && p >= 500)  return false;
+      if (priceR === '500-1000' && (p < 500  || p >= 1000)) return false;
+      if (priceR === '1000-2000'&& (p < 1000 || p >= 2000)) return false;
+      if (priceR === '2000+'    && p < 2000) return false;
+    }
+    return true;
+  });
+}
+
+function renderAll() {
+  updateBadges();
+  updateStats();
+  renderListings();
+}
+
+function renderListings() {
+  const filtered = getFiltered();
+  const container = document.getElementById('listings-container');
+  if (!filtered.length) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">🏡</div><h3>No listings found</h3><p>Try adjusting your filters or add your first listing.</p><button class="btn btn-primary" onclick="openNewListing()">+ New Listing</button></div>`;
+    return;
+  }
+  if (viewMode === 'table') {
+    container.innerHTML = renderTable(filtered);
+  } else {
+    container.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
+  }
+}
+
+function renderCard(l) {
+  const price = l.price ? '$' + parseInt(l.price).toLocaleString() : 'Price TBD';
+  const statusClass = { Active:'badge-active', Pending:'badge-pending', Sold:'badge-sold', Draft:'badge-draft' }[l.status] || 'badge-draft';
+  const photo = l.photoMain
+    ? `<img class="card-photo" src="${l.photoMain}" alt="${l.address}" loading="lazy" onerror="this.outerHTML='<div class=card-photo-placeholder>No Photo</div>'">`
+    : `<div class="card-photo-placeholder">📷 No Photo</div>`;
+  const specs = [
+    l.acres ? l.acres + ' ac' : '',
+    l.beds ? l.beds + ' bd' : '',
+    l.baths ? l.baths + ' ba' : '',
+    l.sqft ? parseInt(l.sqft).toLocaleString() + ' sf' : '',
+    l.stalls ? l.stalls + ' stalls' : '',
+  ].filter(Boolean);
+  const tags = (l.tags || []).slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('');
+  const corrTag = l.corridor ? `<span class="tag">${l.corridor}</span>` : '';
+  const typeTag = l.propType ? `<span class="tag" style="background:var(--tan);color:var(--green)">${l.propType}</span>` : '';
+  return `
+<div class="listing-card">
+  ${photo}
+  <div class="card-status-badge ${statusClass}">${l.status}</div>
+  <div class="card-body">
+    <div class="card-price">${price}</div>
+    <div class="card-address">${l.address}</div>
+    <div class="card-specs">${specs.map(s=>`<span>${s}</span>`).join('')}</div>
+    <div class="card-tags">${corrTag}${typeTag}${tags}</div>
+    <div class="card-actions">
+      <button class="btn btn-ghost btn-sm" onclick="editListing('${l.slug}')">✏️ Edit</button>
+      ${l.mlsLink ? `<a href="${l.mlsLink}" target="_blank" class="btn btn-ghost btn-sm">MLS ↗</a>` : ''}
+      ${l.tourLink ? `<a href="${l.tourLink}" target="_blank" class="btn btn-ghost btn-sm">Tour ↗</a>` : ''}
+    </div>
+  </div>
+</div>`;
+}
+
+function renderTable(filtered) {
+  const rows = filtered.map(l => {
+    const price = l.price ? '$' + parseInt(l.price).toLocaleString() : '—';
+    const statusClass = { Active:'badge-active', Pending:'badge-pending', Sold:'badge-sold', Draft:'badge-draft' }[l.status] || '';
+    return `<tr>
+      <td class="address-cell">${l.address}<span>${l.city}, ${l.stateZip}</span></td>
+      <td class="price-cell">${price}</td>
+      <td><span class="card-status-badge ${statusClass}" style="position:static">${l.status}</span></td>
+      <td>${l.acres ? l.acres + ' ac' : '—'}</td>
+      <td>${l.propType || '—'}</td>
+      <td>${l.corridor || '—'}</td>
+      <td>${l.mls || '—'}</td>
+      <td><button class="btn btn-ghost btn-sm" onclick="editListing('${l.slug}')">Edit</button></td>
+    </tr>`;
+  }).join('');
+  return `<div class="tbl-wrap"><table class="listings-table">
+    <thead><tr>
+      <th>Address</th><th>Price</th><th>Status</th><th>Acres</th><th>Type</th><th>Corridor</th><th>MLS#</th><th></th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>`;
+}
+
+// ════════════════════════════════════════════════════════
+// BADGES + STATS
+// ════════════════════════════════════════════════════════
+function updateBadges() {
+  ['active','pending','sold','draft'].forEach(s => {
+    const count = listings.filter(l => l.status.toLowerCase() === s).length;
+    document.getElementById('badge-' + s).textContent = count;
+  });
+}
+
+function updateStats() {
+  const active  = listings.filter(l => l.status === 'Active');
+  const pending = listings.filter(l => l.status === 'Pending');
+  const thisYear = new Date().getFullYear();
+  const sold    = listings.filter(l => l.status === 'Sold' && l.soldDate && l.soldDate.startsWith(thisYear));
+  const withPrice = active.filter(l => l.price);
+  const avg = withPrice.length ? Math.round(withPrice.reduce((a,l) => a + parseInt(l.price), 0) / withPrice.length) : 0;
+  const total = withPrice.reduce((a,l) => a + parseInt(l.price), 0);
+
+  document.getElementById('stat-active').textContent  = active.length;
+  document.getElementById('stat-pending').textContent = pending.length;
+  document.getElementById('stat-sold').textContent    = sold.length;
+  document.getElementById('stat-avg').textContent     = avg ? '$' + (avg/1000).toFixed(0) + 'K' : '—';
+  document.getElementById('stat-total').textContent   = total ? '$' + (total/1000000).toFixed(1) + 'M' : '—';
+}
+
+// ════════════════════════════════════════════════════════
+// VIEW CONTROLS
+// ════════════════════════════════════════════════════════
+function showView(v) {
+  currentView = v;
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('onclick') === `showView('${v}')`);
+  });
+  renderListings();
+}
+
+function setViewMode(m) {
+  viewMode = m;
+  document.getElementById('view-grid-btn').classList.toggle('active', m === 'grid');
+  document.getElementById('view-table-btn').classList.toggle('active', m === 'table');
+  renderListings();
+}
+
+// ════════════════════════════════════════════════════════
+// ADD / EDIT MODAL
+// ════════════════════════════════════════════════════════
+function buildTagCheckboxes(selectedTags) {
+  const container = document.getElementById('tags-container');
+  container.innerHTML = FACILITY_TAGS.map(tag => {
+    const checked = (selectedTags || []).includes(tag) ? 'checked' : '';
+    return `<label style="display:flex;align-items:center;gap:5px;font-size:.8rem;cursor:pointer;white-space:nowrap">
+      <input type="checkbox" value="${tag}" ${checked} style="width:auto"> ${tag}
+    </label>`;
+  }).join('');
+}
+
+function getSelectedTags() {
+  return [...document.querySelectorAll('#tags-container input:checked')].map(el => el.value);
+}
+
+function openNewListing() {
+  editingSlug = null;
+  document.getElementById('modal-title').textContent = 'New Listing';
+  document.getElementById('delete-btn').style.display = 'none';
+  clearForm();
+  // Default list date to today
+  document.getElementById('f-list-date').value = new Date().toISOString().slice(0,10);
+  buildTagCheckboxes([]);
+  document.getElementById('listing-modal').classList.add('open');
+}
+
+function editListing(slug) {
+  const l = listings.find(x => x.slug === slug);
+  if (!l) return;
+  editingSlug = slug;
+  document.getElementById('modal-title').textContent = 'Edit Listing';
+  document.getElementById('delete-btn').style.display = 'inline-flex';
+  populateForm(l);
+  buildTagCheckboxes(l.tags || []);
+  document.getElementById('listing-modal').classList.add('open');
+}
+
+function clearForm() {
+  const ids = ['f-address','f-city','f-state-zip','f-price','f-mls','f-list-date',
+                'f-sold-price','f-sold-date','f-acres','f-beds','f-baths','f-sqft',
+                'f-year','f-stalls','f-gpm','f-photo1','f-photos','f-mls-link',
+                'f-tour','f-desc','f-notes'];
+  ids.forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  document.getElementById('f-city').value = CITY;
+  document.getElementById('f-state-zip').value = 'AZ 85390';
+  document.getElementById('f-status').value = 'Active';
+  document.getElementById('f-type-sel').value = '';
+  document.getElementById('f-corridor-sel').value = '';
+  document.getElementById('f-county').value = '';
+  document.getElementById('f-arena').value = '';
+  document.getElementById('f-water').value = '';
+}
+
+function populateForm(l) {
+  const set = (id, val) => { const el = document.getElementById(id); if(el && val !== undefined) el.value = val || ''; };
+  set('f-address', l.address);
+  set('f-city', l.city);
+  set('f-state-zip', l.stateZip);
+  set('f-price', l.price);
+  set('f-mls', l.mls);
+  set('f-status', l.status);
+  set('f-list-date', l.listDate);
+  set('f-sold-price', l.soldPrice);
+  set('f-sold-date', l.soldDate);
+  set('f-acres', l.acres);
+  set('f-beds', l.beds);
+  set('f-baths', l.baths);
+  set('f-sqft', l.sqft);
+  set('f-type-sel', l.propType);
+  set('f-corridor-sel', l.corridor);
+  set('f-county', l.county);
+  set('f-year', l.yearBuilt);
+  set('f-stalls', l.stalls);
+  set('f-arena', l.arenaType);
+  set('f-water', l.waterSource);
+  set('f-gpm', l.wellGpm);
+  set('f-photo1', l.photoMain);
+  set('f-photos', (l.photos || []).join('\n'));
+  set('f-mls-link', l.mlsLink);
+  set('f-tour', l.tourLink);
+  set('f-desc', l.description);
+  set('f-notes', l.notes);
+}
+
+function collectForm() {
+  const g = id => document.getElementById(id).value.trim();
+  const address = g('f-address');
+  if (!address) { toast('Address is required'); return null; }
+  const price = g('f-price');
+  if (!price) { toast('Price is required'); return null; }
+
+  const photoLines = g('f-photos').split('\n').map(s=>s.trim()).filter(Boolean);
+
+  return {
+    slug:        editingSlug || makeSlug(address),
+    address,
+    city:        g('f-city') || CITY,
+    stateZip:    g('f-state-zip') || 'AZ 85390',
+    price:       parseInt(price.replace(/[^0-9]/g,'')),
+    status:      document.getElementById('f-status').value,
+    mls:         g('f-mls'),
+    listDate:    g('f-list-date'),
+    soldPrice:   g('f-sold-price') ? parseInt(g('f-sold-price').replace(/[^0-9]/g,'')) : '',
+    soldDate:    g('f-sold-date'),
+    acres:       g('f-acres'),
+    beds:        g('f-beds'),
+    baths:       g('f-baths'),
+    sqft:        g('f-sqft'),
+    propType:    document.getElementById('f-type-sel').value,
+    corridor:    document.getElementById('f-corridor-sel').value,
+    county:      document.getElementById('f-county').value,
+    yearBuilt:   g('f-year'),
+    stalls:      g('f-stalls'),
+    arenaType:   document.getElementById('f-arena').value,
+    waterSource: document.getElementById('f-water').value,
+    wellGpm:     g('f-gpm'),
+    tags:        getSelectedTags(),
+    photoMain:   g('f-photo1'),
+    photos:      photoLines,
+    mlsLink:     g('f-mls-link'),
+    tourLink:    g('f-tour'),
+    description: g('f-desc'),
+    notes:       g('f-notes'),
+  };
+}
+
+async function saveListing() {
+  const l = collectForm();
+  if (!l) return;
+
+  const idx = listings.findIndex(x => x.slug === l.slug);
+  if (idx >= 0) listings[idx] = l;
+  else listings.unshift(l);
+
+  saveLocal();
+  renderAll();
+  closeModal();
+  toast('Saved: ' + l.address);
+
+  // Persist to Supabase in background
+  if (SB_URL.includes('supabase.co') && !SB_URL.includes('SUPABASE_PROJECT_ID')) {
+    const ok = await saveToSupabase(l);
+    if (!ok) toast('⚠️ Supabase sync failed — saved locally only');
+  }
+}
+
+async function deleteListing() {
+  if (!editingSlug) return;
+  if (!confirm('Delete this listing permanently?')) return;
+
+  const l = listings.find(x => x.slug === editingSlug);
+  listings = listings.filter(x => x.slug !== editingSlug);
+  saveLocal();
+  renderAll();
+  closeModal();
+  toast('Deleted: ' + (l ? l.address : editingSlug));
+
+  if (SB_URL.includes('supabase.co') && !SB_URL.includes('SUPABASE_PROJECT_ID')) {
+    await deleteFromSupabase(editingSlug);
+  }
+}
+
+function closeModal() {
+  document.getElementById('listing-modal').classList.remove('open');
+  editingSlug = null;
+}
+
+// ════════════════════════════════════════════════════════
+// TOAST
+// ════════════════════════════════════════════════════════
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+// ════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  updateUserChip();
+  if (!currentUser) promptIdentity();
+
+  // Try Supabase first, fall back to localStorage
+  if (SB_URL.includes('supabase.co') && !SB_URL.includes('SUPABASE_PROJECT_ID')) {
+    loadFromSupabase();
+  } else {
+    const hasLocal = loadLocal();
+    renderAll();
+    if (!hasLocal) {
+      document.getElementById('listings-container').innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">🏡</div>
+          <h3>No listings yet</h3>
+          <p>Add your first Wickenburg horse property listing to get started.</p>
+          <button class="btn btn-primary" onclick="openNewListing()">+ Add First Listing</button>
+        </div>`;
+    }
+  }
+
+  // Close modal on overlay click
+  document.getElementById('listing-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+});
+</script>
+</body>
+</html>
