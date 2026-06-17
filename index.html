@@ -93,7 +93,7 @@
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Contact Us
     </a>
-    <button class="nav-toggle" id="nav-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" id="nav-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
     <a href="https://www.bridleandbit.com" class="header-bb" target="_blank" rel="noopener"><img src="https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/bb-hp-0/public" alt="Bridle &amp; Bit" height="32" style="display:block;opacity:.9;" fetchpriority="low"></a>
     <ul class="nav-primary">
       <li><a href="/neighborhoods/">Neighborhoods</a></li>
@@ -136,15 +136,18 @@
   </ul>
 </nav>
 <script>
-  document.getElementById('nav-btn').addEventListener('click',function(){
+  var navBtn=document.getElementById('nav-btn');
+  navBtn.addEventListener('click',function(){
     var open=document.getElementById('site-nav').classList.toggle('open');
     document.body.classList.toggle('nav-open',open);
+    navBtn.setAttribute('aria-expanded',open?'true':'false');
   });
   document.addEventListener('click',function(e){
     var n=document.getElementById('site-nav');
     if(n&&!n.contains(e.target)){
       n.classList.remove('open');
       document.body.classList.remove('nav-open');
+      navBtn.setAttribute('aria-expanded','false');
     }
   });
 </script>
