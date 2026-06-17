@@ -339,8 +339,8 @@ h2.related-heading + ul { margin-top: 10px; }
    RESPONSIVE — TABLET 641px+
 ════════════════════════════════════════ */
 /* Hide secondary nav at narrow tablet to prevent 2-row wrap */
-/* Hide secondary nav — 9 links need ~1040px to fit single row without wrapping */
-@media (min-width: 641px) and (max-width: 1039px) {
+/* Hide secondary nav — 9 links need ~1100px to fit single row without wrapping */
+@media (min-width: 641px) and (max-width: 1099px) {
   .nav-secondary-bar { display: none; }
 }
 @media (min-width: 641px) {
@@ -386,8 +386,8 @@ h2.related-heading + ul { margin-top: 10px; }
   /* 3-col corridors */
   .corridor-grid { grid-template-columns: 1fr 1fr 1fr; }
   /* Richer hover on desktop — transition consolidated */
-  .corridor-card { transition: border-color .15s, box-shadow .15s, transform .15s; will-change: transform; }
-  .corridor-card:hover { border-color: #8b5e3c; box-shadow: 0 4px 16px rgba(139,94,60,.14); transform: translateY(-1px); }
+  .corridor-card { transition: border-color .15s, box-shadow .15s, transform .15s; }
+  .corridor-card:hover { border-color: #8b5e3c; box-shadow: 0 4px 16px rgba(139,94,60,.14); transform: translateY(-1px); will-change: transform; }
   /* 3-col services */
   .services-grid { grid-template-columns: 1fr 1fr 1fr; }
   /* 3-col footer */
