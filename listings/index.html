@@ -46,7 +46,7 @@
   top: 46px; /* nav height */
   z-index: 50;
 }
-.filter-row { max-width: 760px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.filter-row { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center; }
 .filter-row select, .filter-row input {
   padding: 8px 10px;
   border: 1px solid #e8e0d8;
@@ -55,9 +55,21 @@
   font-size: .85rem;
   background: #fff;
   color: #1a1208;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 40px;
 }
-.filter-row input { flex: 1; min-width: 160px; }
-.filter-count { font-size: .8rem; color: #888; margin-left: auto; white-space: nowrap; }
+.filter-row input { grid-column: 1 / -1; }
+.filter-count { font-size: .8rem; color: #888; grid-column: 1 / -1; text-align: right; }
+@media (min-width: 641px) {
+  .filter-row { grid-template-columns: 1fr auto auto auto auto; }
+  .filter-row input { grid-column: 1; }
+  .filter-count { grid-column: auto; text-align: left; }
+}
+@media (max-width: 400px) {
+  .filter-row { grid-template-columns: 1fr; }
+  .showcase-filters { padding: 8px 12px; }
+}
 
 .listings-wrap { max-width: 960px; margin: 0 auto; padding: 24px 24px 60px; }
 .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
