@@ -54,6 +54,32 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://wickenburghorseproperty.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Buyer's Guides",
+      "item": "https://wickenburghorseproperty.com/guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Zoning"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <nav id="site-nav">
@@ -62,9 +88,11 @@
       <span class="logo-full">WickenburgHorseProperty.com</span>
       <span class="logo-short">Wickenburg HP</span>
     </a>
+    <a href="/services/contact" class="nav-contact-btn" style="display:inline-flex;align-items:center;gap:5px;background:#2c5f2e;color:#fff;border-radius:3px;padding:6px 12px;font-size:.78rem;font-weight:700;text-decoration:none;white-space:nowrap;margin-left:10px;font-family:Georgia,serif;">Contact Us</a>
     <button class="nav-toggle" id="nav-btn" aria-label="Menu"><span></span><span></span><span></span></button>
     <ul class="nav-primary">
-      <li><a href="/neighborhoods/">Neighborhoods</a></li>
+      <li><a href="/services/sell-your-property.html">Sell Your Property</a></li>
+    <li><a href="/neighborhoods/">Neighborhoods</a></li>
       <li><a href="/guides/">Buyer's Guides</a></li>
       <li><a href="/agents.html">Agents</a></li>
       <li><a href="/articles/">Articles</a></li>
@@ -110,6 +138,8 @@
   });
 </script>
 <main class="page-main">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="bc-list"><li><a href="/" class="bc-link">Home</a></li><li><span class="bc-sep" aria-hidden="true">›</span></li><li><a href="/guides/" class="bc-link">Buyer's Guides</a></li><li><span class="bc-sep" aria-hidden="true">›</span></li><li><span class="bc-current" aria-current="page">Zoning</span></li></ol></nav>
+<div class="page-hero-img" role="img" aria-label="Arizona county zoning map detail — horse property zoning guide Wickenburg" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1000&q=75&fit=crop')"></div>
 <h1>Zoning & Ag Exemptions in the Wickenburg Area</h1>
 <p style="font-size:.85em;color:#888;margin-bottom:24px;"><a href="/guides/" style="color:#2c5f2e;">Buyer's Guides</a> &rsaquo; Zoning & Ag Exemptions</p>
 <p>Wickenburg straddles two counties — Maricopa and Yavapai — and that boundary has real consequences for horse property buyers. The two counties have different zoning frameworks, different animal density allowances, different agricultural exemption programs, and different processes for obtaining conditional use permits when the intended use goes beyond what the zoning designation allows by right. Knowing which county a property is in is the first step in any Wickenburg horse property evaluation, and it should be confirmed from the county assessor's parcel data — not from the listing description, the seller's representation, or the address, which can fall in one county for mail delivery and another for land use jurisdiction.</p>
@@ -158,5 +188,6 @@
       <div style="flex:1;min-width:220px;max-width:280px;"><a href="https://www.horsepropertyguide.com" style="font-family:Georgia,serif;font-size:0.95rem;font-weight:700;color:#c9973a;text-decoration:none;">Horse Property Guide</a><p style="font-family:Georgia,serif;font-size:0.82rem;color:#d4b896;margin:6px 0 0 0;line-height:1.6;">The complete buyer's guide to evaluating, purchasing, and owning horse property across the United States.</p></div>
     </div>
   </div>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"e8b33bc79099427393f57bf292a402b7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
