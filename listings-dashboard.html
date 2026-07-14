@@ -256,6 +256,17 @@ table.listings-table tr:hover td { background: var(--tan); }
 </style>
 </head>
 <body>
+<div id="login-gate" style="display:none;position:fixed;inset:0;background:#1a1a1a;align-items:center;justify-content:center;z-index:9999;">
+  <form id="login-form" style="background:#fff;padding:28px;border-radius:10px;width:320px;max-width:90%;box-shadow:0 10px 40px rgba(0,0,0,.4);font-family:system-ui,sans-serif">
+    <h2 style="margin:0 0 4px;font-size:1.2rem">Admin Sign In</h2>
+    <p style="margin:0 0 16px;color:#666;font-size:.85rem" id="login-site">Dashboard</p>
+    <input id="login-email" type="email" placeholder="Email" required style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #ccc;border-radius:6px;box-sizing:border-box">
+    <input id="login-pass" type="password" placeholder="Password" required style="width:100%;padding:10px;margin-bottom:14px;border:1px solid #ccc;border-radius:6px;box-sizing:border-box">
+    <button type="submit" style="width:100%;padding:10px;background:#C8922A;color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer">Sign In</button>
+    <p id="login-err" style="color:#c00;font-size:.8rem;margin:10px 0 0;display:none">Wrong email or password.</p>
+  </form>
+</div>
+<div id="dash-root">
 
 <!-- ── Header ── -->
 <header class="header">
@@ -570,15 +581,21 @@ table.listings-table tr:hover td { background: var(--tan); }
 const SITE_NAME  = 'WickenburgHorseProperty.com';
 const CITY       = 'Wickenburg';
 const SB_URL     = 'https://ykkfziyxipeuugocwswo.supabase.co';
-const SB_KEY     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlra2Z6aXl4aXBldXVnb2N3c3dvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Mzk3MjIwNSwiZXhwIjoyMDg5NTQ4MjA1fQ.Qb5iS8fflfepdNvjf7fEUZmBGmYTY1pepVxsY8fshtk';
+// PUBLIC anon (publishable) key — safe to expose. NEVER put a service_role/secret key here.
+const SB_KEY     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlra2Z6aXl4aXBldXVnb2N3c3dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NzIyMDUsImV4cCI6MjA4OTU0ODIwNX0.BbTuMNHEXm8PUjFgKc0Te6rjoW7ns-2A8dzCtShV8-4';
 const TABLE      = 'listings';
 
-const SB_HDR = {
-  'apikey': SB_KEY,
-  'Authorization': 'Bearer ' + SB_KEY,
-  'Content-Type': 'application/json',
-  'Prefer': 'return=minimal'
-};
+// --- Auth session (set after login). Writes are authorized by the admin's token + RLS. ---
+let SB_SESSION = null;
+try { SB_SESSION = JSON.parse(localStorage.getItem('hp_session') || 'null'); } catch(e) {}
+function sbHeaders(extra){ const token=(SB_SESSION&&SB_SESSION.access_token)?SB_SESSION.access_token:SB_KEY; return Object.assign({'apikey':SB_KEY,'Authorization':'Bearer '+token,'Content-Type':'application/json','Prefer':'return=minimal'}, extra||{}); }
+async function login(email,password){ const r=await fetch(SB_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'apikey':SB_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password})}); const j=await r.json().catch(()=>({})); if(!r.ok||!j.access_token) return false; SB_SESSION=j; localStorage.setItem('hp_session',JSON.stringify(j)); return true; }
+async function refreshSession(){ if(!SB_SESSION||!SB_SESSION.refresh_token) return false; const r=await fetch(SB_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{'apikey':SB_KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:SB_SESSION.refresh_token})}); const j=await r.json().catch(()=>({})); if(r.ok&&j.access_token){SB_SESSION=j;localStorage.setItem('hp_session',JSON.stringify(j));return true;} logout(); return false; }
+function logout(){ SB_SESSION=null; localStorage.removeItem('hp_session'); showLogin(); }
+function isLoggedIn(){ return !!(SB_SESSION&&SB_SESSION.access_token); }
+function showLogin(){ document.getElementById('login-gate').style.display='flex'; document.getElementById('dash-root').style.display='none'; }
+function showDash(){ document.getElementById('login-gate').style.display='none'; document.getElementById('dash-root').style.display=''; }
+async function initAuth(){ if(isLoggedIn()){ await refreshSession(); } if(isLoggedIn()){ try{ if(SB_SESSION.user&&SB_SESSION.user.email){ currentUser=SB_SESSION.user.email; localStorage.setItem('hp_agent',currentUser);} }catch(e){} updateUserChip(); showDash(); loadFromSupabase(); } else { showLogin(); } }
 
 // ════════════════════════════════════════════════════════
 // FACILITY TAGS — checkboxes in the form
@@ -624,7 +641,7 @@ function updateUserChip() {
 // ════════════════════════════════════════════════════════
 async function sbFetch(path, opts = {}) {
   try {
-    const r = await fetch(SB_URL + path, { headers: SB_HDR, ...opts });
+    const r = await fetch(SB_URL + path, { headers: sbHeaders(), ...opts });
     if (!r.ok) { console.warn('SB error', r.status, await r.text()); return null; }
     return r.status === 204 ? true : r.json();
   } catch(e) { console.warn('SB offline:', e.message); return null; }
@@ -643,7 +660,7 @@ async function saveToSupabase(listing) {
   const row = listingToRow(listing);
   return sbFetch(`/rest/v1/${TABLE}?on_conflict=slug`, {
     method: 'POST',
-    headers: { ...SB_HDR, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+    headers: sbHeaders({ 'Prefer': 'resolution=merge-duplicates,return=minimal' }),
     body: JSON.stringify(row)
   });
 }
@@ -1090,11 +1107,20 @@ function toast(msg) {
 // ════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   updateUserChip();
-  if (!currentUser) promptIdentity();
+  var _lf = document.getElementById('login-form');
+  if (_lf) {
+    document.getElementById('login-site').textContent = SITE_NAME + ' dashboard';
+    _lf.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      document.getElementById('login-err').style.display = 'none';
+      var ok = await login(document.getElementById('login-email').value.trim(), document.getElementById('login-pass').value);
+      if (ok) { initAuth(); } else { document.getElementById('login-err').style.display = 'block'; }
+    });
+  }
 
   // Try Supabase first, fall back to localStorage
   if (SB_URL.includes('supabase.co') && !SB_URL.includes('SUPABASE_PROJECT_ID')) {
-    loadFromSupabase();
+    initAuth();
   } else {
     const hasLocal = loadLocal();
     renderAll();
@@ -1115,5 +1141,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+</div><!-- /dash-root -->
 </body>
 </html>
